@@ -134,7 +134,9 @@ export default defineNuxtConfig({
     host: '0.0.0.0'
   },
 
-  bridge: false,
+  bridge: {
+    nitro: true
+  },
 
   /**
    * Temporary workaround for @nuxt-community/tailwindcss-module.
