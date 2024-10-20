@@ -121,7 +121,8 @@ export default defineNuxtConfig({
           autoprefixer: {}
         }
       }
-    }
+    },
+    transpile: ['luxon', 'cookie-es']
   },
   watchers: {
     webpack: {
@@ -135,6 +136,7 @@ export default defineNuxtConfig({
   },
 
   bridge: {
+    transpile: true,
     nitro: true
   },
 
