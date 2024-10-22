@@ -110,7 +110,7 @@ const translations = {
 
 function loadTranslationStrings(code) {
   return new Promise((resolve) => {
-    import(`../strings/${code}`)
+    import(`../strings/${code}.json`)
       .then((fileContents) => {
         resolve(fileContents.default)
       })
