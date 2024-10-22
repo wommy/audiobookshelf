@@ -90,7 +90,6 @@
 </template>
 
 <script>
-import Path from 'path'
 import uploadHelpers from '@/mixins/uploadHelpers'
 
 export default {
@@ -355,9 +354,9 @@ export default {
       const itemsToUpload = []
 
       // Check if path already exists before starting upload
-      //  uploading fails if path already exists
+      // uploading fails if path already exists
       for (const item of items) {
-        const filepath = Path.join(this.selectedFolder.fullPath, item.directory)
+        const filepath = `${this.selectedFolder.fullPath}/${item.directory}` // Use string concatenation instead
         const exists = await this.$axios
           .$post(`/api/filesystem/pathexists`, { filepath })
           .then((data) => {

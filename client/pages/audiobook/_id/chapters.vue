@@ -201,8 +201,6 @@
 </template>
 
 <script>
-import path from 'path'
-
 export default {
   async asyncData({ store, params, app, redirect, from }) {
     if (!store.getters['user/getUserCanUpdate']) {
@@ -293,9 +291,12 @@ export default {
       let index = 0
       const chapters = []
       for (const track of this.audioTracks) {
+        // Removed path.basename and path.extname, replaced with string manipulation
+        const filename = track.metadata.filename
+        const title = filename.substring(0, filename.lastIndexOf('.')) // Get the title without extension
         chapters.push({
           id: index++,
-          title: path.basename(track.metadata.filename, path.extname(track.metadata.filename)),
+          title,
           start: currentStartTime,
           end: currentStartTime + track.duration
         })
