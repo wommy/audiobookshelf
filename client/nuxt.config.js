@@ -36,8 +36,8 @@ export default defineNuxtConfig({
     ]
   },
 
-  router: {
-    base: routerBasePath
+  app: {
+    baseURL: routerBasePath
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -45,9 +45,6 @@ export default defineNuxtConfig({
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['@/plugins/constants.js', '@/plugins/init.client.js', '@/plugins/axios.js', '@/plugins/toast.js', '@/plugins/utils.js', '@/plugins/i18n.js'],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -136,9 +133,18 @@ export default defineNuxtConfig({
   },
 
   bridge: {
+    vite: true,
+    typescript: {
+      esbuild: true
+    },
+    nitro: true,
+    capi: true,
     transpile: true,
-    nitro: true
+    scriptSetup: true,
+    imports: true,
+    constraints: false
   },
+  vite: {},
 
   /**
    * Temporary workaround for @nuxt-community/tailwindcss-module.
