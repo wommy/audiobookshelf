@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import Path from 'path'
 import vClickOutside from 'v-click-outside'
 import { formatDistance, format, addDays, isDate, setDefaultOptions } from 'date-fns'
 import * as locale from 'date-fns/locale'
@@ -79,8 +78,8 @@ Vue.prototype.$sanitizeFilename = (filename, colonReplacement = ' - ') => {
     .replace(/\s+/g, ' ') // Replace consecutive spaces with a single space
 
   // Check if basename is too many bytes
-  const ext = Path.extname(sanitized) // separate out file extension
-  const basename = Path.basename(sanitized, ext)
+  const ext = filename.split('.').pop() // Get the file extension
+  const basename = filename.substring(0, filename.length - ext.length - 1) // Get the basename
   const extByteLength = Buffer.byteLength(ext, 'utf16le')
   const basenameByteLength = Buffer.byteLength(basename, 'utf16le')
   if (basenameByteLength + extByteLength > MAX_FILENAME_BYTES) {
