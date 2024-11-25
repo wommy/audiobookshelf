@@ -2,13 +2,18 @@
   "name": "audiobookshelf",
   "version": "2.17.2",
   "buildNumber": 1,
-  "description": "Self-hosted audiobook and podcast server",
+  "description": "Self-hosted audiobook and podcast app",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch server index.js",
+    "dev:client": "nuxt",
+    "dev2": "nuxt --hostname localhost --port 1337",
     "start": "node index.js",
-    "client": "cd client && npm ci && npm run generate",
-    "prod": "npm run client && npm ci && node prod.js",
+    "start:client": "nuxt start",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "client": "npm ci && npm run generate",
+    "prod": "npm run client && node prod.js",
     "build-win": "npm run client && pkg -t node20-win-x64 -o ./dist/win/audiobookshelf -C GZip .",
     "build-linux": "build/linuxpackager",
     "docker": "docker buildx build --platform linux/amd64,linux/arm64 --push .  -t advplyr/audiobookshelf",
@@ -16,12 +21,15 @@
     "docker-arm64-local": "docker buildx build --platform linux/arm64 --load .  -t advplyr/audiobookshelf-arm64-local",
     "deploy-linux": "node deploy/linux",
     "test": "mocha",
+    "test:client": "npm run compile-tailwind && cypress run --component --browser chrome",
+    "test-visually": "npm run compile-tailwind && cypress open --component --browser chrome",
+    "compile-tailwind": "tailwindcss -i ./assets/tailwind.css -o ./cypress/support/tailwind.compiled.css",
     "coverage": "nyc mocha"
   },
   "bin": "prod.js",
   "pkg": {
     "assets": [
-      "client/dist/**/*",
+      "dist/**/*",
       "node_modules/sqlite3/lib/binding/**/*.node",
       "server/migrations/*.js"
     ],
@@ -36,15 +44,27 @@
   "author": "advplyr",
   "license": "GPL-3.0",
   "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/proxy": "^2.1.0",
+    "@teckel/vue-pdf": "^4.3.5",
     "axios": "^0.27.2",
     "cookie-parser": "^1.4.6",
+    "core-js": "^3.16.0",
+    "cron-parser": "^4.7.1",
+    "date-fns": "^2.25.0",
+    "epubjs": "^0.3.88",
     "express": "^4.17.1",
     "express-session": "^1.17.3",
+    "fast-average-color": "^9.4.0",
     "graceful-fs": "^4.2.10",
+    "hls.js": "^1.5.7",
     "htmlparser2": "^8.0.1",
+    "libarchive.js": "^1.3.0",
     "lru-cache": "^10.0.3",
     "node-unrar-js": "^2.0.2",
     "nodemailer": "^6.9.13",
+    "nuxt": "^2.18.1",
+    "nuxt-socket-io": "^1.1.18",
     "openid-client": "^5.6.1",
     "p-throttle": "^4.1.1",
     "passport": "^0.6.0",
@@ -54,13 +74,24 @@
     "socket.io": "^4.5.4",
     "sqlite3": "^5.1.6",
     "ssrf-req-filter": "^1.1.0",
+    "trix": "^1.3.1",
+    "v-click-outside": "^3.1.2",
+    "vue-toastification": "^1.7.11",
+    "vuedraggable": "^2.24.3",
     "xml2js": "^0.5.0"
   },
   "devDependencies": {
+    "@nuxtjs/pwa": "^3.3.5",
+    "autoprefixer": "^10.4.7",
     "chai": "^4.3.10",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
     "nyc": "^15.1.0",
-    "sinon": "^17.0.1"
+    "postcss": "^8.3.6",
+    "sinon": "^17.0.1",
+    "tailwindcss": "^3.4.1"
+  },
+  "optionalDependencies": {
+    "cypress": "^13.7.3"
   }
 }
