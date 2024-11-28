@@ -14,37 +14,31 @@ export default defineNuxtConfig({
     // vite: true,
   },
   // vite: {},
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
-  target: 'static',
   app: { baseURL: routerBasePath },
+  build: { transpile: [({ isClient }) => isClient && 'luxon', 'cookie-es'] },
+  css: ['@/assets/tailwind.css', '@/assets/app.css'],
   dev: process.env.NODE_ENV !== 'production',
   devServer: { host: '0.0.0.0' },
+  // devServerHandlers: [],
   env: {
     serverUrl: serverHostUrl + routerBasePath,
     chromecastReceiver: 'FD1F76C5'
   },
-  telemetry: false,
-
-  publicRuntimeConfig: { version, routerBasePath },
-
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Audiobookshelf',
-    htmlAttrs: {
-      lang: 'en'
-    },
-    meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: '' }, { hid: 'robots', name: 'robots', content: 'noindex' }],
-    script: [],
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      // { hid: 'description', name: 'description', content: '' },
+      { hid: 'robots', name: 'robots', content: 'noindex' }
+    ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: routerBasePath + '/favicon.ico' },
       { rel: 'apple-touch-icon', href: routerBasePath + '/ios_icon.png' }
-    ]
+    ],
+    htmlAttrs: { lang: 'en' }
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['@/assets/tailwind.css', '@/assets/app.css'],
-
+  ignore: ['**/*.{test,cy}.*'],
 
   modules: [
     ['nuxt-socket-io', { sockets: [{ name: 'dev', url: serverHostUrl }, { name: 'prod' }] }],
@@ -71,16 +65,8 @@ export default defineNuxtConfig({
     ]
   ],
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: { transpile: [({ isClient }) => isClient && 'luxon', 'cookie-es'] },
-
-  /**
-   * Temporary workaround for @nuxt-community/tailwindcss-module.
-   *
-   * Reported: 2022-05-23
-   * See: [Issue tracker](https://github.com/nuxt-community/tailwindcss-module/issues/480)
-   */
-  devServerHandlers: [],
-
-  ignore: ['**/*.test.*', '**/*.cy.*']
+  publicRuntimeConfig: { version, routerBasePath },
+  ssr: false,
+  // target: 'static',
+  telemetry: false
 })
