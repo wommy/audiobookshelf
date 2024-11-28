@@ -17,7 +17,9 @@ export default defineNuxtConfig({
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
   target: 'static',
+  app: { baseURL: routerBasePath },
   dev: process.env.NODE_ENV !== 'production',
+  devServer: { host: '0.0.0.0' },
   env: {
     serverUrl: serverHostUrl + routerBasePath,
     chromecastReceiver: 'FD1F76C5'
@@ -40,15 +42,9 @@ export default defineNuxtConfig({
     ]
   },
 
-  router: {
-    base: routerBasePath
-  },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/tailwind.css', '@/assets/app.css'],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/constants.js', '@/plugins/init.client.js', '@/plugins/axios.js', '@/plugins/toast.js', '@/plugins/utils.js', '@/plugins/i18n.js'],
 
   modules: [
     ['nuxt-socket-io', { sockets: [{ name: 'dev', url: serverHostUrl }, { name: 'prod' }] }],
@@ -77,16 +73,6 @@ export default defineNuxtConfig({
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: { transpile: [({ isClient }) => isClient && 'luxon', 'cookie-es'] },
-  watchers: {
-    webpack: {
-      aggregateTimeout: 300,
-      poll: 1000
-    }
-  },
-  server: {
-    port: process.env.NODE_ENV === 'production' ? 80 : 3000,
-    host: '0.0.0.0'
-  },
 
   /**
    * Temporary workaround for @nuxt-community/tailwindcss-module.
