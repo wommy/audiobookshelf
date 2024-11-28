@@ -1,10 +1,11 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
 import { version } from './package.json'
 
-const routerBasePath = process.env.ROUTER_BASE_PATH || ''
-const serverHostUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3333'
+const { NODE_ENV, ROUTER_BASE_PATH: baseURL = '' } = process.env
+const dev = NODE_ENV !== 'production'
+const serverUrl = dev ? 'http://localhost:3333' : ''
 const serverPaths = ['api/', 'public/', 'hls/', 'auth/', 'feed/', 'status', 'login', 'logout', 'init']
-const proxy = Object.fromEntries(serverPaths.map((path) => [`${routerBasePath}/${path}`, { target: process.env.NODE_ENV !== 'production' ? serverHostUrl : '/' }]))
+const proxy = Object.fromEntries(serverPaths.map((path) => [`${baseURL}/${path}`, { target: dev ? serverUrl : '/' }]))
 
 export default defineNuxtConfig({
   bridge: {
@@ -14,14 +15,14 @@ export default defineNuxtConfig({
     // vite: true,
   },
   // vite: {},
-  app: { baseURL: routerBasePath },
+  app: { baseURL },
   build: { transpile: [({ isClient }) => isClient && 'luxon', 'cookie-es'] },
   css: ['@/assets/tailwind.css', '@/assets/app.css'],
-  dev: process.env.NODE_ENV !== 'production',
+  dev,
   devServer: { host: '0.0.0.0' },
   // devServerHandlers: [],
   env: {
-    serverUrl: serverHostUrl + routerBasePath,
+    serverUrl: serverUrl + baseURL,
     chromecastReceiver: 'FD1F76C5'
   },
   head: {
@@ -33,16 +34,16 @@ export default defineNuxtConfig({
       { hid: 'robots', name: 'robots', content: 'noindex' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: routerBasePath + '/favicon.ico' },
-      { rel: 'apple-touch-icon', href: routerBasePath + '/ios_icon.png' }
+      { rel: 'icon', type: 'image/x-icon', href: baseURL + '/favicon.ico' },
+      { rel: 'apple-touch-icon', href: baseURL + '/ios_icon.png' }
     ],
     htmlAttrs: { lang: 'en' }
   },
   ignore: ['**/*.{test,cy}.*'],
 
   modules: [
-    ['nuxt-socket-io', { sockets: [{ name: 'dev', url: serverHostUrl }, { name: 'prod' }] }],
-    ['@nuxtjs/axios', { baseURL: routerBasePath }],
+    ['nuxt-socket-io', { sockets: [{ name: 'dev', url: serverUrl }, { name: 'prod' }] }],
+    ['@nuxtjs/axios', { baseURL }],
     ['@nuxtjs/proxy', proxy],
     [
       '@nuxtjs/pwa',
@@ -56,8 +57,8 @@ export default defineNuxtConfig({
         manifest: {
           background_color: '#232323',
           icons: [
-            { src: routerBasePath + '/icon.svg', sizes: 'any' },
-            { src: routerBasePath + '/icon192.png', type: 'image/png', sizes: 'any' }
+            { src: baseURL + '/icon.svg', sizes: 'any' },
+            { src: baseURL + '/icon192.png', type: 'image/png', sizes: 'any' }
           ]
         },
         workbox: { offline: false, cacheAssets: false }
@@ -65,7 +66,7 @@ export default defineNuxtConfig({
     ]
   ],
 
-  publicRuntimeConfig: { version, routerBasePath },
+  publicRuntimeConfig: { version, baseURL },
   ssr: false,
   // target: 'static',
   telemetry: false
