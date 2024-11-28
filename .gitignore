@@ -9,6 +9,7 @@
 /metadata/
 /.nuxt/
 /dist/
+.output
 /deploy/
 /coverage/
 /.nyc_output/

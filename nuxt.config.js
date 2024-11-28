@@ -1,11 +1,19 @@
-const pkg = require('./package.json')
+import { defineNuxtConfig } from '@nuxt/bridge'
+import { version } from './package.json'
 
 const routerBasePath = process.env.ROUTER_BASE_PATH || ''
 const serverHostUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3333'
 const serverPaths = ['api/', 'public/', 'hls/', 'auth/', 'feed/', 'status', 'login', 'logout', 'init']
 const proxy = Object.fromEntries(serverPaths.map((path) => [`${routerBasePath}/${path}`, { target: process.env.NODE_ENV !== 'production' ? serverHostUrl : '/' }]))
 
-module.exports = {
+export default defineNuxtConfig({
+  bridge: {
+    // macros: { pageMeta: true },
+    // meta: true,
+    // typescript: { esbuild: true },
+    // vite: true,
+  },
+  // vite: {},
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
   target: 'static',
@@ -16,10 +24,7 @@ module.exports = {
   },
   telemetry: false,
 
-  publicRuntimeConfig: {
-    version: pkg.version,
-    routerBasePath
-  },
+  publicRuntimeConfig: { version, routerBasePath },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -44,9 +49,6 @@ module.exports = {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['@/plugins/constants.js', '@/plugins/init.client.js', '@/plugins/axios.js', '@/plugins/toast.js', '@/plugins/utils.js', '@/plugins/i18n.js'],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -112,16 +114,7 @@ module.exports = {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    postcss: {
-      postcssOptions: {
-        plugins: {
-          tailwindcss: {},
-          autoprefixer: {}
-        }
-      }
-    }
-  },
+  build: { transpile: [({ isClient }) => isClient && 'luxon', 'cookie-es'] },
   watchers: {
     webpack: {
       aggregateTimeout: 300,
@@ -142,4 +135,4 @@ module.exports = {
   devServerHandlers: [],
 
   ignore: ['**/*.test.*', '**/*.cy.*']
-}
+})
