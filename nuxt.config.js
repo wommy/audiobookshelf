@@ -1,145 +1,73 @@
-const pkg = require('./package.json')
+import { defineNuxtConfig } from '@nuxt/bridge'
+import { version } from './package.json'
 
-const routerBasePath = process.env.ROUTER_BASE_PATH || ''
-const serverHostUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3333'
+const { NODE_ENV, ROUTER_BASE_PATH: baseURL = '' } = process.env
+const dev = NODE_ENV !== 'production'
+const serverUrl = dev ? 'http://localhost:3333' : ''
 const serverPaths = ['api/', 'public/', 'hls/', 'auth/', 'feed/', 'status', 'login', 'logout', 'init']
-const proxy = Object.fromEntries(serverPaths.map((path) => [`${routerBasePath}/${path}`, { target: process.env.NODE_ENV !== 'production' ? serverHostUrl : '/' }]))
+const proxy = Object.fromEntries(serverPaths.map((path) => [`${baseURL}/${path}`, { target: dev ? serverUrl : '/' }]))
 
-module.exports = {
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
-  target: 'static',
-  dev: process.env.NODE_ENV !== 'production',
+export default defineNuxtConfig({
+  bridge: {
+    // macros: { pageMeta: true },
+    // meta: true,
+    // typescript: { esbuild: true },
+    // vite: true,
+  },
+  // vite: {},
+  app: { baseURL },
+  build: { transpile: [({ isClient }) => isClient && 'luxon', 'cookie-es'] },
+  css: ['@/assets/tailwind.css', '@/assets/app.css'],
+  dev,
+  devServer: { host: '0.0.0.0' },
+  // devServerHandlers: [],
   env: {
-    serverUrl: serverHostUrl + routerBasePath,
+    serverUrl: serverUrl + baseURL,
     chromecastReceiver: 'FD1F76C5'
   },
-  telemetry: false,
-
-  publicRuntimeConfig: {
-    version: pkg.version,
-    routerBasePath
-  },
-
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Audiobookshelf',
-    htmlAttrs: {
-      lang: 'en'
-    },
-    meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: '' }, { hid: 'robots', name: 'robots', content: 'noindex' }],
-    script: [],
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      // { hid: 'description', name: 'description', content: '' },
+      { hid: 'robots', name: 'robots', content: 'noindex' }
+    ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: routerBasePath + '/favicon.ico' },
-      { rel: 'apple-touch-icon', href: routerBasePath + '/ios_icon.png' }
+      { rel: 'icon', type: 'image/x-icon', href: baseURL + '/favicon.ico' },
+      { rel: 'apple-touch-icon', href: baseURL + '/ios_icon.png' }
+    ],
+    htmlAttrs: { lang: 'en' }
+  },
+  ignore: ['**/*.{test,cy}.*'],
+
+  modules: [
+    ['nuxt-socket-io', { sockets: [{ name: 'dev', url: serverUrl }, { name: 'prod' }] }],
+    ['@nuxtjs/axios', { baseURL }],
+    ['@nuxtjs/proxy', proxy],
+    [
+      '@nuxtjs/pwa',
+      {
+        icon: false,
+        meta: {
+          appleStatusBarStyle: 'black',
+          theme_color: '#232323',
+          nativeUI: true
+        },
+        manifest: {
+          background_color: '#232323',
+          icons: [
+            { src: baseURL + '/icon.svg', sizes: 'any' },
+            { src: baseURL + '/icon192.png', type: 'image/png', sizes: 'any' }
+          ]
+        },
+        workbox: { offline: false, cacheAssets: false }
+      }
     ]
-  },
-
-  router: {
-    base: routerBasePath
-  },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['@/assets/tailwind.css', '@/assets/app.css'],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/constants.js', '@/plugins/init.client.js', '@/plugins/axios.js', '@/plugins/toast.js', '@/plugins/utils.js', '@/plugins/i18n.js'],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/pwa'
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['nuxt-socket-io', '@nuxtjs/axios', '@nuxtjs/proxy'],
-
-  proxy,
-
-  io: {
-    sockets: [
-      {
-        name: 'dev',
-        url: serverHostUrl
-      },
-      {
-        name: 'prod'
-      }
-    ]
-  },
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseURL: routerBasePath
-  },
-
-  // nuxt/pwa https://pwa.nuxtjs.org
-  pwa: {
-    icon: false,
-    meta: {
-      appleStatusBarStyle: 'black',
-      name: 'Audiobookshelf',
-      theme_color: '#232323',
-      mobileAppIOS: true,
-      nativeUI: true
-    },
-    manifest: {
-      name: 'Audiobookshelf',
-      short_name: 'Audiobookshelf',
-      display: 'standalone',
-      background_color: '#232323',
-      icons: [
-        {
-          src: routerBasePath + '/icon.svg',
-          sizes: 'any'
-        },
-        {
-          src: routerBasePath + '/icon192.png',
-          type: 'image/png',
-          sizes: 'any'
-        }
-      ]
-    },
-    workbox: {
-      offline: false,
-      cacheAssets: false,
-      preCaching: [],
-      runtimeCaching: []
-    }
-  },
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    postcss: {
-      postcssOptions: {
-        plugins: {
-          tailwindcss: {},
-          autoprefixer: {}
-        }
-      }
-    }
-  },
-  watchers: {
-    webpack: {
-      aggregateTimeout: 300,
-      poll: 1000
-    }
-  },
-  server: {
-    port: process.env.NODE_ENV === 'production' ? 80 : 3000,
-    host: '0.0.0.0'
-  },
-
-  /**
-   * Temporary workaround for @nuxt-community/tailwindcss-module.
-   *
-   * Reported: 2022-05-23
-   * See: [Issue tracker](https://github.com/nuxt-community/tailwindcss-module/issues/480)
-   */
-  devServerHandlers: [],
-
-  ignore: ['**/*.test.*', '**/*.cy.*']
-}
+  publicRuntimeConfig: { version, baseURL },
+  ssr: false,
+  // target: 'static',
+  telemetry: false
+})
