@@ -50,68 +50,30 @@ export default defineNuxtConfig({
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['@/plugins/constants.js', '@/plugins/init.client.js', '@/plugins/axios.js', '@/plugins/toast.js', '@/plugins/utils.js', '@/plugins/i18n.js'],
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/pwa'
-  ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['nuxt-socket-io', '@nuxtjs/axios', '@nuxtjs/proxy'],
-
-  proxy,
-
-  io: {
-    sockets: [
+  modules: [
+    ['nuxt-socket-io', { sockets: [{ name: 'dev', url: serverHostUrl }, { name: 'prod' }] }],
+    ['@nuxtjs/axios', { baseURL: routerBasePath }],
+    ['@nuxtjs/proxy', proxy],
+    [
+      '@nuxtjs/pwa',
       {
-        name: 'dev',
-        url: serverHostUrl
-      },
-      {
-        name: 'prod'
+        icon: false,
+        meta: {
+          appleStatusBarStyle: 'black',
+          theme_color: '#232323',
+          nativeUI: true
+        },
+        manifest: {
+          background_color: '#232323',
+          icons: [
+            { src: routerBasePath + '/icon.svg', sizes: 'any' },
+            { src: routerBasePath + '/icon192.png', type: 'image/png', sizes: 'any' }
+          ]
+        },
+        workbox: { offline: false, cacheAssets: false }
       }
     ]
-  },
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseURL: routerBasePath
-  },
-
-  // nuxt/pwa https://pwa.nuxtjs.org
-  pwa: {
-    icon: false,
-    meta: {
-      appleStatusBarStyle: 'black',
-      name: 'Audiobookshelf',
-      theme_color: '#232323',
-      mobileAppIOS: true,
-      nativeUI: true
-    },
-    manifest: {
-      name: 'Audiobookshelf',
-      short_name: 'Audiobookshelf',
-      display: 'standalone',
-      background_color: '#232323',
-      icons: [
-        {
-          src: routerBasePath + '/icon.svg',
-          sizes: 'any'
-        },
-        {
-          src: routerBasePath + '/icon192.png',
-          type: 'image/png',
-          sizes: 'any'
-        }
-      ]
-    },
-    workbox: {
-      offline: false,
-      cacheAssets: false,
-      preCaching: [],
-      runtimeCaching: []
-    }
-  },
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: { transpile: [({ isClient }) => isClient && 'luxon', 'cookie-es'] },
