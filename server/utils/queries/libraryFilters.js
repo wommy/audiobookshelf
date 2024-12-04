@@ -1,14 +1,14 @@
-const Sequelize = require('sequelize')
-const Logger = require('../../Logger')
-const Database = require('../../Database')
-const libraryItemsBookFilters = require('./libraryItemsBookFilters')
-const libraryItemsPodcastFilters = require('./libraryItemsPodcastFilters')
-const { createNewSortInstance } = require('../../libs/fastSort')
+import Sequelize from 'sequelize'
+import Logger from '../../Logger.js'
+import Database from '../../Database.js'
+import libraryItemsBookFilters from './libraryItemsBookFilters.js'
+import libraryItemsPodcastFilters from './libraryItemsPodcastFilters.js'
+import { createNewSortInstance } from 'fast-sort'
 const naturalSort = createNewSortInstance({
   comparer: new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare
 })
 
-module.exports = {
+export default {
   decode(text) {
     return Buffer.from(decodeURIComponent(text), 'base64').toString()
   },

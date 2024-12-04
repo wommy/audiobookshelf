@@ -1,14 +1,14 @@
-const Path = require('path')
+import Path from 'node:path'
 
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
 
-const fs = require('../libs/fsExtra')
-const Feed = require('../objects/Feed')
-const libraryItemsBookFilters = require('../utils/queries/libraryItemsBookFilters')
+import fs from 'fs-extra'
+import Feed from '../objects/Feed.js'
+import libraryItemsBookFilters from '../utils/queries/libraryItemsBookFilters.js'
 
-class RssFeedManager {
+export default class RssFeedManager {
   constructor() {}
 
   async validateFeedEntity(feedObj) {
@@ -300,4 +300,3 @@ class RssFeedManager {
     return feeds
   }
 }
-module.exports = RssFeedManager

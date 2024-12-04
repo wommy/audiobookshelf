@@ -1,5 +1,5 @@
-const { parseNfoMetadata } = require('../utils/parsers/parseNfoMetadata')
-const { readTextFile } = require('../utils/fileUtils')
+import { parseNfoMetadata } from '../utils/parsers/parseNfoMetadata.js'
+import { readTextFile } from '../utils/fileUtils.js'
 
 class NfoFileScanner {
   constructor() {}
@@ -49,4 +49,4 @@ class NfoFileScanner {
     }
   }
 }
-module.exports = new NfoFileScanner()
+export default new NfoFileScanner()

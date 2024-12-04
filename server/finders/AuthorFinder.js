@@ -1,9 +1,9 @@
-const fs = require('../libs/fsExtra')
-const Logger = require('../Logger')
-const Path = require('path')
-const Audnexus = require('../providers/Audnexus')
+import fs from 'fs-extra'
+import Logger from '../Logger.js'
+import Path from 'node:path'
+import Audnexus from '../providers/Audnexus.js'
 
-const { downloadImageFile } = require('../utils/fileUtils')
+import { downloadImageFile } from '../utils/fileUtils.js'
 
 class AuthorFinder {
   constructor() {
@@ -65,4 +65,4 @@ class AuthorFinder {
     })
   }
 }
-module.exports = new AuthorFinder()
+export default new AuthorFinder()

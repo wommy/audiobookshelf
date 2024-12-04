@@ -1,10 +1,10 @@
-const Sequelize = require('sequelize')
-const Database = require('../../Database')
-const PlaybackSession = require('../../models/PlaybackSession')
-const MediaProgress = require('../../models/MediaProgress')
-const fsExtra = require('../../libs/fsExtra')
+import Sequelize from 'sequelize'
+import Database from '../../Database.js'
+import PlaybackSession from '../../models/PlaybackSession.js'
+import MediaProgress from '../../models/MediaProgress.js'
+import fsExtra from 'fs-extra'
 
-module.exports = {
+export default {
   /**
    *
    * @param {string} userId

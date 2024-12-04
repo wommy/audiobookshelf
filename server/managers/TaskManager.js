@@ -1,5 +1,5 @@
-const SocketAuthority = require('../SocketAuthority')
-const Task = require('../objects/Task')
+import SocketAuthority from '../SocketAuthority.js'
+import Task from '../objects/Task.js'
 
 /**
  * @typedef TaskString
@@ -68,4 +68,4 @@ class TaskManager {
     return task
   }
 }
-module.exports = new TaskManager()
+export default new TaskManager()

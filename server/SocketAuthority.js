@@ -1,7 +1,7 @@
-const SocketIO = require('socket.io')
-const Logger = require('./Logger')
-const Database = require('./Database')
-const Auth = require('./Auth')
+import * as SocketIO from 'socket.io'
+import Logger from './Logger.js'
+import Database from './Database.js'
+import Auth from './Auth.js'
 
 /**
  * @typedef SocketClient
@@ -230,4 +230,4 @@ class SocketAuthority {
     this.Server.cancelLibraryScan(id)
   }
 }
-module.exports = new SocketAuthority()
+export default new SocketAuthority()

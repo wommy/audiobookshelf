@@ -1,4 +1,4 @@
-const uuidv4 = require('uuid').v4
+import { v4 as uuidv4 } from 'uuid'
 
 /**
  * @typedef TaskString
@@ -7,7 +7,7 @@ const uuidv4 = require('uuid').v4
  * @property {string[]} [subs]
  */
 
-class Task {
+export default class Task {
   constructor() {
     /** @type {string} */
     this.id = null
@@ -130,4 +130,3 @@ class Task {
     this.finishedAt = Date.now()
   }
 }
-module.exports = Task

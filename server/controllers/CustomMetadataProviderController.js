@@ -1,9 +1,10 @@
-const { Request, Response, NextFunction } = require('express')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
 
-const { validateUrl } = require('../utils/index')
+import { validateUrl } from '../utils/index.js'
 
 /**
  * @typedef RequestUserObject
@@ -122,4 +123,4 @@ class CustomMetadataProviderController {
     next()
   }
 }
-module.exports = new CustomMetadataProviderController()
+export default new CustomMetadataProviderController()

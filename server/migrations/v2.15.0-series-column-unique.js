@@ -207,4 +207,4 @@ async function down({ context: { queryInterface, logger } }) {
   logger.info('[2.15.0 migration] DOWNGRADE END: 2.15.0-series-column-unique ')
 }
 
-module.exports = { up, down }
+export default { up, down }

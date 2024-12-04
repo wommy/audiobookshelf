@@ -1,18 +1,19 @@
-const { Request, Response, NextFunction } = require('express')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
 
-const fs = require('../libs/fsExtra')
+import fs from 'fs-extra'
 
-const { getPodcastFeed, findMatchingEpisodes } = require('../utils/podcastUtils')
-const { getFileTimestampsWithIno, filePathToPOSIX } = require('../utils/fileUtils')
-const { validateUrl } = require('../utils/index')
+import { getPodcastFeed, findMatchingEpisodes } from '../utils/podcastUtils.js'
+import { getFileTimestampsWithIno, filePathToPOSIX } from '../utils/fileUtils.js'
+import { validateUrl } from '../utils/index.js'
 
-const Scanner = require('../scanner/Scanner')
-const CoverManager = require('../managers/CoverManager')
+import Scanner from '../scanner/Scanner.js'
+import CoverManager from '../managers/CoverManager.js'
 
-const LibraryItem = require('../objects/LibraryItem')
+import LibraryItem from '../objects/LibraryItem.js'
 
 /**
  * @typedef RequestUserObject
@@ -484,4 +485,4 @@ class PodcastController {
     next()
   }
 }
-module.exports = new PodcastController()
+export default new PodcastController()

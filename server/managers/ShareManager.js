@@ -1,8 +1,8 @@
-const Database = require('../Database')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const LongTimeout = require('../utils/longTimeout')
-const { elapsedPretty } = require('../utils/index')
+import Database from '../Database.js'
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import LongTimeout from '../utils/longTimeout.js'
+import { elapsedPretty } from '../utils/index.js'
 
 /**
  * @typedef OpenMediaItemShareObject
@@ -186,4 +186,4 @@ class ShareManager {
     }
   }
 }
-module.exports = new ShareManager()
+export default new ShareManager()

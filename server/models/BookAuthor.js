@@ -1,6 +1,6 @@
-const { DataTypes, Model } = require('sequelize')
+import { DataTypes, Model } from 'sequelize'
 
-class BookAuthor extends Model {
+export default class BookAuthor extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -81,4 +81,3 @@ class BookAuthor extends Model {
     BookAuthor.belongsTo(author)
   }
 }
-module.exports = BookAuthor

@@ -1,5 +1,5 @@
-const Logger = require('../../Logger')
-const { areEquivalent, copyValue, isNullOrNaN } = require('../../utils')
+import Logger from '../../Logger.js'
+import { areEquivalent, copyValue, isNullOrNaN } from '../../utils/index.js'
 
 /**
  * @typedef EreaderDeviceObject
@@ -10,7 +10,7 @@ const { areEquivalent, copyValue, isNullOrNaN } = require('../../utils')
  */
 
 // REF: https://nodemailer.com/smtp/
-class EmailSettings {
+export default class EmailSettings {
   constructor(settings = null) {
     this.id = 'email-settings'
     this.host = null
@@ -175,4 +175,3 @@ class EmailSettings {
     return this.ereaderDevices.find((d) => d.name === deviceName)
   }
 }
-module.exports = EmailSettings

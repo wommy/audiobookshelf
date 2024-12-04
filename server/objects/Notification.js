@@ -1,6 +1,6 @@
-const uuidv4 = require("uuid").v4
+import { v4 as uuidv4 } from 'uuid'
 
-class Notification {
+export default class Notification {
   constructor(notification = null) {
     this.id = null
     this.libraryId = null
@@ -130,4 +130,3 @@ class Notification {
     }
   }
 }
-module.exports = Notification

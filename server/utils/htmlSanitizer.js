@@ -1,7 +1,7 @@
-const sanitizeHtml = require('../libs/sanitizeHtml')
-const { entities } = require("./htmlEntities");
+import sanitizeHtml from 'sanitize-html'
+import { entities } from './htmlEntities.js'
 
-function sanitize(html) {
+export function sanitize(html) {
   const sanitizerOptions = {
     allowedTags: [
       'p', 'ol', 'ul', 'li', 'a', 'strong', 'em', 'del', 'br'
@@ -16,9 +16,8 @@ function sanitize(html) {
 
   return sanitizeHtml(html, sanitizerOptions)
 }
-module.exports.sanitize = sanitize
 
-function stripAllTags(html, shouldDecodeEntities = true) {
+export function stripAllTags(html, shouldDecodeEntities = true) {
   const sanitizerOptions = {
     allowedTags: [],
     disallowedTagsMode: 'discard'
@@ -27,9 +26,8 @@ function stripAllTags(html, shouldDecodeEntities = true) {
   let sanitized = sanitizeHtml(html, sanitizerOptions)
   return shouldDecodeEntities ? decodeHTMLEntities(sanitized) : sanitized
 }
-module.exports.stripAllTags = stripAllTags
 
-function decodeHTMLEntities(strToDecode) {
+export function decodeHTMLEntities(strToDecode) {
   return strToDecode.replace(/\&([^;]+);?/g, function (entity) {
     if (entity in entities) {
       return entities[entity]

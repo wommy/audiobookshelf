@@ -1,8 +1,8 @@
-const axios = require('axios').default
-const Throttle = require('p-throttle')
-const Logger = require('../Logger')
-const { levenshteinDistance } = require('../utils/index')
-const { isValidASIN } = require('../utils/index')
+import axios from 'axios'
+import Throttle from 'p-throttle'
+import Logger from '../Logger.js'
+import { levenshteinDistance } from '../utils/index.js'
+import { isValidASIN } from '../utils/index.js'
 
 /**
  * @typedef AuthorSearchObj
@@ -12,7 +12,7 @@ const { isValidASIN } = require('../utils/index')
  * @property {string} name
  */
 
-class Audnexus {
+export default class Audnexus {
   static _instance = null
 
   constructor() {
@@ -183,5 +183,3 @@ class Audnexus {
     }
   }
 }
-
-module.exports = Audnexus

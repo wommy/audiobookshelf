@@ -1,12 +1,12 @@
-const h = require('htmlparser2')
-const Logger = require('../../Logger')
+import * as h from 'htmlparser2'
+import Logger from '../../Logger.js'
 
 /**
  *
  * @param {string} opmlText
  * @returns {Array<{title: string, feedUrl: string}>
  */
-function parse(opmlText) {
+export function parse(opmlText) {
   var feeds = []
   var parser = new h.Parser({
     onopentag: (name, attribs) => {
@@ -25,4 +25,3 @@ function parse(opmlText) {
   parser.write(opmlText)
   return feeds
 }
-module.exports.parse = parse

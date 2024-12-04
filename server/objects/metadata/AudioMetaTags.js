@@ -1,4 +1,4 @@
-class AudioMetaTags {
+export default class AudioMetaTags {
   constructor(metadata) {
     this.tagAlbum = null
     this.tagAlbumSort = null
@@ -251,4 +251,3 @@ class AudioMetaTags {
     return true
   }
 }
-module.exports = AudioMetaTags

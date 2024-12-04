@@ -1,20 +1,21 @@
-const axios = require('axios')
-const passport = require('passport')
-const { Request, Response, NextFunction } = require('express')
-const bcrypt = require('./libs/bcryptjs')
-const jwt = require('./libs/jsonwebtoken')
-const requestIp = require('./libs/requestIp')
-const LocalStrategy = require('./libs/passportLocal')
-const JwtStrategy = require('passport-jwt').Strategy
-const ExtractJwt = require('passport-jwt').ExtractJwt
-const OpenIDClient = require('openid-client')
-const Database = require('./Database')
-const Logger = require('./Logger')
+import axios from 'axios'
+import passport from 'passport'
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import bcrypt from 'bcrypt-edge'
+import jwt from 'jsonwebtoken'
+import requestIp from 'request-ip'
+import LocalStrategy from 'passport-local'
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
+import { Issuer, Strategy as OpenIDClientStrategy } from 'openid-client'
+import Database from './Database.js'
+import Logger from './Logger.js'
+import crypto from 'crypto'
 
 /**
  * @class Class for handling all the authentication related functionality.
  */
-class Auth {
+export default class Auth {
   constructor() {
     // Map of openId sessions indexed by oauth2 state-variable
     this.openIdAuthSession = new Map()
@@ -809,7 +810,7 @@ class Auth {
       // User can supply their own token secret
       Database.serverSettings.tokenSecret = process.env.TOKEN_SECRET
     } else {
-      Database.serverSettings.tokenSecret = require('crypto').randomBytes(256).toString('base64')
+      Database.serverSettings.tokenSecret = crypto.randomBytes(256).toString('base64')
     }
     await Database.updateServerSettings()
 
@@ -1004,5 +1005,3 @@ class Auth {
     }
   }
 }
-
-module.exports = Auth

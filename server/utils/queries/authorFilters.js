@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize')
-const Database = require('../../Database')
+import Sequelize from 'sequelize'
+import Database from '../../Database.js'
 
-module.exports = {
+export default {
   /**
    * Get authors total count
    *

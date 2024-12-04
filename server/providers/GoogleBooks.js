@@ -1,7 +1,7 @@
-const axios = require('axios')
-const Logger = require('../Logger')
+import axios from 'axios'
+import Logger from '../Logger.js'
 
-class GoogleBooks {
+export default class GoogleBooks {
   #responseTimeout = 30000
 
   constructor() {}
@@ -73,5 +73,3 @@ class GoogleBooks {
     return items.map((item) => this.cleanResult(item))
   }
 }
-
-module.exports = GoogleBooks

@@ -1,5 +1,5 @@
-const parseEpubMetadata = require('./parseEpubMetadata')
-const parseComicMetadata = require('./parseComicMetadata')
+import * as parseEpubMetadata from './parseEpubMetadata.js'
+import * as parseComicMetadata from './parseComicMetadata.js'
 
 /**
  * @typedef EBookFileScanData
@@ -15,7 +15,7 @@ const parseComicMetadata = require('./parseComicMetadata')
  * @param {import('../../models/Book').EBookFileObject} ebookFile 
  * @returns {Promise<EBookFileScanData>}
  */
-async function parse(ebookFile) {
+export const parse = async (ebookFile) => {
   if (!ebookFile) return null
 
   if (ebookFile.ebookFormat === 'epub') {
@@ -25,7 +25,6 @@ async function parse(ebookFile) {
   }
   return null
 }
-module.exports.parse = parse
 
 /**
  * Extract cover from ebook file
@@ -34,7 +33,7 @@ module.exports.parse = parse
  * @param {string} outputCoverPath 
  * @returns {Promise<boolean>}
  */
-async function extractCoverImage(ebookFileScanData, outputCoverPath) {
+export const extractCoverImage = async (ebookFileScanData, outputCoverPath) => {
   if (!ebookFileScanData?.ebookCoverPath) return false
 
   if (ebookFileScanData.ebookFormat === 'epub') {
@@ -44,4 +43,3 @@ async function extractCoverImage(ebookFileScanData, outputCoverPath) {
   }
   return false
 }
-module.exports.extractCoverImage = extractCoverImage

@@ -1,10 +1,10 @@
-const { DataTypes, Model } = require('sequelize')
+import { DataTypes, Model } from 'sequelize'
 
-const oldEmailSettings = require('../objects/settings/EmailSettings')
-const oldServerSettings = require('../objects/settings/ServerSettings')
-const oldNotificationSettings = require('../objects/settings/NotificationSettings')
+import oldEmailSettings from '../objects/settings/EmailSettings.js'
+import oldServerSettings from '../objects/settings/ServerSettings.js'
+import oldNotificationSettings from '../objects/settings/NotificationSettings.js'
 
-class Setting extends Model {
+export default class Setting extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -60,5 +60,3 @@ class Setting extends Model {
     )
   }
 }
-
-module.exports = Setting

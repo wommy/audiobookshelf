@@ -1,6 +1,6 @@
-const date = require('./libs/dateAndTime')
-const { LogLevel } = require('./utils/constants')
-const util = require('util')
+import date from 'date-and-time'
+import { LogLevel } from './utils/constants.js'
+import util from 'node:util'
 
 class Logger {
   constructor() {
@@ -148,4 +148,4 @@ class Logger {
     this.#log('NOTE', this.source, ...args)
   }
 }
-module.exports = new Logger()
+export default new Logger()

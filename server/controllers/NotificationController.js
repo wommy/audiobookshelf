@@ -1,7 +1,9 @@
-const { Request, Response, NextFunction } = require('express')
-const Database = require('../Database')
-const { version } = require('../../package.json')
-const NotificationManager = require('../managers/NotificationManager')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import Database from '../Database.js'
+import pkg from '../../package.json' with { type: 'json' }
+const { version } = pkg
+import NotificationManager from '../managers/NotificationManager.js'
 
 /**
  * @typedef RequestUserObject
@@ -150,4 +152,4 @@ class NotificationController {
     next()
   }
 }
-module.exports = new NotificationController()
+export default new NotificationController()

@@ -1,12 +1,13 @@
-const { Umzug, SequelizeStorage } = require('../libs/umzug')
-const { Sequelize, DataTypes } = require('sequelize')
-const semver = require('semver')
-const path = require('path')
-const Module = require('module')
-const fs = require('../libs/fsExtra')
-const Logger = require('../Logger')
+import { Umzug, SequelizeStorage } from 'umzug'
+import { Sequelize, DataTypes } from 'sequelize'
+import semver from 'semver'
+import path from 'node:path'
+import Module from 'node:module'
+import fs from 'fs-extra'
+import Logger from '../Logger.js'
+import { fileURLToPath } from 'node:url'
 
-class MigrationManager {
+export default class MigrationManager {
   static MIGRATIONS_META_TABLE = 'migrationsMeta'
 
   /**
@@ -20,7 +21,7 @@ class MigrationManager {
     this.isDatabaseNew = isDatabaseNew
     if (!configPath) throw new Error('Config path is required for MigrationManager.')
     this.configPath = configPath
-    this.migrationsSourceDir = path.join(__dirname, '..', 'migrations')
+    this.migrationsSourceDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'migrations')
     this.initialized = false
     this.migrationsDir = null
     this.maxVersion = null
@@ -130,7 +131,10 @@ class MigrationManager {
 
   async initUmzug(umzugStorage = new SequelizeStorage({ sequelize: this.sequelize })) {
     // This check is for dependency injection in tests
-    const files = (await fs.readdir(this.migrationsDir)).filter((file) => !file.startsWith('.')).map((file) => path.join(this.migrationsDir, file))
+    const files = fs
+      .readdir(this.migrationsDir)
+      .filter((file) => !file.startsWith('.'))
+      .map((file) => path.join(this.migrationsDir, file))
 
     const parent = new Umzug({
       migrations: {
@@ -302,5 +306,3 @@ class MigrationManager {
     this.databaseVersion = this.serverVersion
   }
 }
-
-module.exports = MigrationManager

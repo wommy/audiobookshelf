@@ -1,21 +1,22 @@
-const { Request, Response, NextFunction } = require('express')
-const Path = require('path')
-const fs = require('../libs/fsExtra')
-const uaParserJs = require('../libs/uaParser')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import Path from 'node:path'
+import fs from 'fs-extra'
+import * as uaParserJs from 'ua-parser-js'
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
 
-const zipHelpers = require('../utils/zipHelpers')
-const { reqSupportsWebp } = require('../utils/index')
-const { ScanResult, AudioMimeType } = require('../utils/constants')
-const { getAudioMimeTypeFromExtname, encodeUriPath } = require('../utils/fileUtils')
-const LibraryItemScanner = require('../scanner/LibraryItemScanner')
-const AudioFileScanner = require('../scanner/AudioFileScanner')
-const Scanner = require('../scanner/Scanner')
-const CacheManager = require('../managers/CacheManager')
-const CoverManager = require('../managers/CoverManager')
-const ShareManager = require('../managers/ShareManager')
+import * as zipHelpers from '../utils/zipHelpers.js'
+import { reqSupportsWebp } from '../utils/index.js'
+import { ScanResult, AudioMimeType } from '../utils/constants.js'
+import { getAudioMimeTypeFromExtname, encodeUriPath } from '../utils/fileUtils.js'
+import LibraryItemScanner from '../scanner/LibraryItemScanner.js'
+import AudioFileScanner from '../scanner/AudioFileScanner.js'
+import Scanner from '../scanner/Scanner.js'
+import CacheManager from '../managers/CacheManager.js'
+import CoverManager from '../managers/CoverManager.js'
+import ShareManager from '../managers/ShareManager.js'
 
 /**
  * @typedef RequestUserObject
@@ -962,4 +963,4 @@ class LibraryItemController {
     next()
   }
 }
-module.exports = new LibraryItemController()
+export default new LibraryItemController()

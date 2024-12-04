@@ -1,6 +1,6 @@
-const { DataTypes, Model } = require('sequelize')
+import { DataTypes, Model } from 'sequelize'
 
-class LibraryFolder extends Model {
+export default class LibraryFolder extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -55,5 +55,3 @@ class LibraryFolder extends Model {
     }
   }
 }
-
-module.exports = LibraryFolder

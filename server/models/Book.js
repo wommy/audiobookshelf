@@ -1,5 +1,5 @@
-const { DataTypes, Model } = require('sequelize')
-const Logger = require('../Logger')
+import { DataTypes, Model } from 'sequelize'
+import Logger from '../Logger.js'
 
 /**
  * @typedef EBookFileObject
@@ -56,7 +56,7 @@ const Logger = require('../Logger')
  * @property {string} mimeType
  */
 
-class Book extends Model {
+export default class Book extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -321,5 +321,3 @@ class Book extends Model {
     )
   }
 }
-
-module.exports = Book

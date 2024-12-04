@@ -1,13 +1,12 @@
-const express = require('express')
-const Path = require('path')
+import express from 'express'
+import Path from 'node:path'
 
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
 
-const fs = require('../libs/fsExtra')
+import fs from 'fs-extra'
 
-
-class HlsRouter {
+export default class HlsRouter {
   constructor(auth, playbackSessionManager) {
     this.auth = auth
     this.playbackSessionManager = playbackSessionManager
@@ -97,4 +96,3 @@ class HlsRouter {
     res.sendFile(fullFilePath)
   }
 }
-module.exports = HlsRouter

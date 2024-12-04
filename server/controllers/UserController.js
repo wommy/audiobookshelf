@@ -1,10 +1,11 @@
-const { Request, Response, NextFunction } = require('express')
-const uuidv4 = require('uuid').v4
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import { v4 as uuidv4 } from 'uuid'
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
 
-const { toNumber } = require('../utils/index')
+import { toNumber } from '../utils/index.js'
 
 /**
  * @typedef RequestUserObject
@@ -477,4 +478,4 @@ class UserController {
     next()
   }
 }
-module.exports = new UserController()
+export default new UserController()

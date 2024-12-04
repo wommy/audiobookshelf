@@ -14,7 +14,7 @@ process.env.NODE_ENV = 'production'
 
 const server = require('./server/Server')
 
-global.appRoot = __dirname
+global.appRoot = import.meta.dirname
 
 var inputConfig = options.config ? Path.resolve(options.config) : null
 var inputMetadata = options.metadata ? Path.resolve(options.metadata) : null

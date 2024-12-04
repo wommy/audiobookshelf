@@ -1,9 +1,9 @@
-const Sequelize = require('sequelize')
-const Database = require('../../Database')
-const PlaybackSession = require('../../models/PlaybackSession')
-const fsExtra = require('../../libs/fsExtra')
+import Sequelize from 'sequelize'
+import Database from '../../Database.js'
+import PlaybackSession from '../../models/PlaybackSession.js'
+import fsExtra from 'fs-extra'
 
-module.exports = {
+export default {
   /**
    * 
    * @param {number} year YYYY

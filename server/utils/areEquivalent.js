@@ -17,7 +17,7 @@
  @param value2 Other item to compare
  @param stack Used internally to track circular refs - don't set it
  */
-module.exports = function areEquivalent(value1, value2, numToString = false, stack = []) {
+export default function areEquivalent(value1, value2, numToString = false, stack = []) {
   if (numToString) {
     if (value1 !== null && !isNaN(value1)) value1 = String(value1)
     if (value2 !== null && !isNaN(value2)) value2 = String(value2)
@@ -153,5 +153,5 @@ module.exports = function areEquivalent(value1, value2, numToString = false, sta
 
   // Walk the same, talk the same - matching ducks. Quack.
   // 🦆🦆
-  return true;
+  return true
 }

@@ -1,48 +1,49 @@
-const Path = require('path')
-const Sequelize = require('sequelize')
-const express = require('express')
-const http = require('http')
-const util = require('util')
-const fs = require('./libs/fsExtra')
-const fileUpload = require('./libs/expressFileupload')
-const cookieParser = require('cookie-parser')
+import Path from 'path'
+import Sequelize from 'sequelize'
+import express from 'express'
+import http from 'http'
+import util from 'util'
+import fs from 'fs-extra'
+import fileUpload from 'express-fileupload'
+import cookieParser from 'cookie-parser'
 
-const { version } = require('../package.json')
+import pkg from '../package.json' with { type: 'json' }
+const { version } = pkg
 
 // Utils
-const fileUtils = require('./utils/fileUtils')
-const Logger = require('./Logger')
+import * as fileUtils from './utils/fileUtils.js'
+import Logger from './Logger.js'
 
-const Auth = require('./Auth')
-const Watcher = require('./Watcher')
-const Database = require('./Database')
-const SocketAuthority = require('./SocketAuthority')
+import Auth from './Auth.js'
+import Watcher from './Watcher.js'
+import Database from './Database.js'
+import SocketAuthority from './SocketAuthority.js'
 
-const ApiRouter = require('./routers/ApiRouter')
-const HlsRouter = require('./routers/HlsRouter')
-const PublicRouter = require('./routers/PublicRouter')
+import ApiRouter from './routers/ApiRouter.js'
+import HlsRouter from './routers/HlsRouter.js'
+import PublicRouter from './routers/PublicRouter.js'
 
-const LogManager = require('./managers/LogManager')
-const EmailManager = require('./managers/EmailManager')
-const AbMergeManager = require('./managers/AbMergeManager')
-const CacheManager = require('./managers/CacheManager')
-const BackupManager = require('./managers/BackupManager')
-const PlaybackSessionManager = require('./managers/PlaybackSessionManager')
-const PodcastManager = require('./managers/PodcastManager')
-const AudioMetadataMangaer = require('./managers/AudioMetadataManager')
-const RssFeedManager = require('./managers/RssFeedManager')
-const CronManager = require('./managers/CronManager')
-const ApiCacheManager = require('./managers/ApiCacheManager')
-const BinaryManager = require('./managers/BinaryManager')
-const ShareManager = require('./managers/ShareManager')
-const LibraryScanner = require('./scanner/LibraryScanner')
+import LogManager from './managers/LogManager.js'
+import EmailManager from './managers/EmailManager.js'
+import AbMergeManager from './managers/AbMergeManager.js'
+import CacheManager from './managers/CacheManager.js'
+import BackupManager from './managers/BackupManager.js'
+import PlaybackSessionManager from './managers/PlaybackSessionManager.js'
+import PodcastManager from './managers/PodcastManager.js'
+import AudioMetadataManager from './managers/AudioMetadataManager.js'
+import RssFeedManager from './managers/RssFeedManager.js'
+import CronManager from './managers/CronManager.js'
+import ApiCacheManager from './managers/ApiCacheManager.js'
+import BinaryManager from './managers/BinaryManager.js'
+import ShareManager from './managers/ShareManager.js'
+import LibraryScanner from './scanner/LibraryScanner.js'
 
 //Import the main Passport and Express-Session library
-const passport = require('passport')
-const expressSession = require('express-session')
-const MemoryStore = require('./libs/memorystore')
+import passport from 'passport'
+import expressSession from 'express-session'
+import MemoryStore from './libs/memorystore/index.js'
 
-class Server {
+export default class Server {
   constructor(SOURCE, PORT, HOST, CONFIG_PATH, METADATA_PATH, ROUTER_BASE_PATH) {
     this.Port = PORT
     this.Host = HOST
@@ -70,7 +71,7 @@ class Server {
     this.abMergeManager = new AbMergeManager()
     this.playbackSessionManager = new PlaybackSessionManager()
     this.podcastManager = new PodcastManager()
-    this.audioMetadataManager = new AudioMetadataMangaer()
+    this.audioMetadataManager = new AudioMetadataManager()
     this.rssFeedManager = new RssFeedManager()
     this.cronManager = new CronManager(this.podcastManager, this.playbackSessionManager)
     this.apiCacheManager = new ApiCacheManager()
@@ -455,4 +456,3 @@ class Server {
     })
   }
 }
-module.exports = Server

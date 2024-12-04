@@ -1,14 +1,14 @@
-const uuidv4 = require('uuid').v4
-const fs = require('../libs/fsExtra')
-const Path = require('path')
-const Logger = require('../Logger')
-const LibraryFile = require('./files/LibraryFile')
-const Book = require('./mediaTypes/Book')
-const Podcast = require('./mediaTypes/Podcast')
-const { areEquivalent, copyValue } = require('../utils/index')
-const { filePathToPOSIX, getFileTimestampsWithIno } = require('../utils/fileUtils')
+import { v4 as uuidv4 } from 'uuid'
+import fs from 'fs-extra'
+import Path from 'node:path'
+import Logger from '../Logger.js'
+import LibraryFile from './files/LibraryFile.js'
+import Book from './mediaTypes/Book.js'
+import Podcast from './mediaTypes/Podcast.js'
+import { areEquivalent, copyValue } from '../utils/index.js'
+import { filePathToPOSIX, getFileTimestampsWithIno } from '../utils/fileUtils.js'
 
-class LibraryItem {
+export default class LibraryItem {
   constructor(libraryItem = null) {
     this.id = null
     this.ino = null // Inode
@@ -343,4 +343,3 @@ class LibraryItem {
     this.media.setEbookFile(ebookLibraryFile)
   }
 }
-module.exports = LibraryItem

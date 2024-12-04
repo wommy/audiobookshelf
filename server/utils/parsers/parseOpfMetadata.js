@@ -1,5 +1,5 @@
-const { xmlToJSON } = require('../index')
-const htmlSanitizer = require('../htmlSanitizer')
+import { xmlToJSON } from '../index.js'
+import * as htmlSanitizer from '../htmlSanitizer.js'
 
 /**
  * @typedef MetadataCreatorObject
@@ -180,7 +180,7 @@ function stripPrefix(str) {
   return str.split(':').pop()
 }
 
-module.exports.parseOpfMetadataJson = (json) => {
+export const parseOpfMetadataJson = (json) => {
   // Handle <package ...> or with prefix <ns0:package ...>
   const packageKey = Object.keys(json).find((key) => stripPrefix(key) === 'package')
   if (!packageKey) return null
@@ -224,7 +224,7 @@ module.exports.parseOpfMetadataJson = (json) => {
   }
 }
 
-module.exports.parseOpfMetadataXML = async (xml) => {
+export const parseOpfMetadataXML = async (xml) => {
   const json = await xmlToJSON(xml)
   if (!json) return null
   return this.parseOpfMetadataJson(json)

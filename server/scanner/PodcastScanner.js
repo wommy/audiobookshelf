@@ -1,16 +1,16 @@
-const uuidv4 = require("uuid").v4
-const Path = require('path')
-const { LogLevel } = require('../utils/constants')
-const { getTitleIgnorePrefix } = require('../utils/index')
-const AudioFileScanner = require('./AudioFileScanner')
-const Database = require('../Database')
-const { filePathToPOSIX, getFileTimestampsWithIno } = require('../utils/fileUtils')
-const AudioFile = require('../objects/files/AudioFile')
-const CoverManager = require('../managers/CoverManager')
-const LibraryFile = require('../objects/files/LibraryFile')
-const fsExtra = require("../libs/fsExtra")
-const PodcastEpisode = require("../models/PodcastEpisode")
-const AbsMetadataFileScanner = require("./AbsMetadataFileScanner")
+import { v4 as uuidv4 } from 'uuid'
+import Path from 'node:path'
+import { LogLevel } from '../utils/constants.js'
+import { getTitleIgnorePrefix } from '../utils/index.js'
+import AudioFileScanner from './AudioFileScanner.js'
+import Database from '../Database.js'
+import { filePathToPOSIX, getFileTimestampsWithIno } from '../utils/fileUtils.js'
+import AudioFile from '../objects/files/AudioFile.js'
+import CoverManager from '../managers/CoverManager.js'
+import LibraryFile from '../objects/files/LibraryFile.js'
+import fsExtra from 'fs-extra'
+import PodcastEpisode from '../models/PodcastEpisode.js'
+import AbsMetadataFileScanner from './AbsMetadataFileScanner.js'
 
 /**
  * Metadata for podcasts pulled from files
@@ -436,4 +436,4 @@ class PodcastScanner {
     })
   }
 }
-module.exports = new PodcastScanner()
+export default new PodcastScanner()

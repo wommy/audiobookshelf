@@ -1,7 +1,7 @@
-const axios = require('axios')
-const Logger = require('../Logger')
+import axios from 'axios'
+import Logger from '../Logger.js'
 
-class FantLab {
+export default class FantLab {
   #responseTimeout = 30000
   // 7 - other
   // 11 - essay
@@ -198,5 +198,3 @@ class FantLab {
     return editionInfo?.image || null
   }
 }
-
-module.exports = FantLab

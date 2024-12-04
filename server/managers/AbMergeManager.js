@@ -1,13 +1,13 @@
-const Path = require('path')
-const fs = require('../libs/fsExtra')
-const Logger = require('../Logger')
-const TaskManager = require('./TaskManager')
-const Task = require('../objects/Task')
-const ffmpegHelpers = require('../utils/ffmpegHelpers')
-const Ffmpeg = require('../libs/fluentFfmpeg')
-const SocketAuthority = require('../SocketAuthority')
-const { isWritable, copyToExisting } = require('../utils/fileUtils')
-const TrackProgressMonitor = require('../objects/TrackProgressMonitor')
+import Path from 'node:path'
+import fs from 'fs-extra'
+import Logger from '../Logger.js'
+import TaskManager from './TaskManager.js'
+import Task from '../objects/Task.js'
+import * as ffmpegHelpers from '../utils/ffmpegHelpers.js'
+import Ffmpeg from 'fluent-ffmpeg'
+import SocketAuthority from '../SocketAuthority.js'
+import { isWritable, copyToExisting } from '../utils/fileUtils.js'
+import TrackProgressMonitor from '../objects/TrackProgressMonitor.js'
 
 /**
  * @typedef AbMergeEncodeOptions
@@ -16,7 +16,7 @@ const TrackProgressMonitor = require('../objects/TrackProgressMonitor')
  * @property {string} bitrate
  */
 
-class AbMergeManager {
+export default class AbMergeManager {
   constructor() {
     this.itemsCacheDir = Path.join(global.MetadataPath, 'cache/items')
 
@@ -290,4 +290,3 @@ class AbMergeManager {
     TaskManager.taskFinished(task)
   }
 }
-module.exports = AbMergeManager

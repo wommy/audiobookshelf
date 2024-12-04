@@ -1,41 +1,41 @@
-const express = require('express')
-const Path = require('path')
-const sequelize = require('sequelize')
+import express from 'express'
+import Path from 'node:path'
+import sequelize from 'sequelize'
 
-const Logger = require('../Logger')
-const Database = require('../Database')
-const SocketAuthority = require('../SocketAuthority')
+import Logger from '../Logger.js'
+import Database from '../Database.js'
+import SocketAuthority from '../SocketAuthority.js'
 
-const fs = require('../libs/fsExtra')
-const date = require('../libs/dateAndTime')
+import fs from 'fs-extra'
+import date from 'date-and-time'
 
-const CacheManager = require('../managers/CacheManager')
+import CacheManager from '../managers/CacheManager.js'
 
-const LibraryController = require('../controllers/LibraryController')
-const UserController = require('../controllers/UserController')
-const CollectionController = require('../controllers/CollectionController')
-const PlaylistController = require('../controllers/PlaylistController')
-const MeController = require('../controllers/MeController')
-const BackupController = require('../controllers/BackupController')
-const LibraryItemController = require('../controllers/LibraryItemController')
-const SeriesController = require('../controllers/SeriesController')
-const FileSystemController = require('../controllers/FileSystemController')
-const AuthorController = require('../controllers/AuthorController')
-const SessionController = require('../controllers/SessionController')
-const PodcastController = require('../controllers/PodcastController')
-const NotificationController = require('../controllers/NotificationController')
-const EmailController = require('../controllers/EmailController')
-const SearchController = require('../controllers/SearchController')
-const CacheController = require('../controllers/CacheController')
-const ToolsController = require('../controllers/ToolsController')
-const RSSFeedController = require('../controllers/RSSFeedController')
-const CustomMetadataProviderController = require('../controllers/CustomMetadataProviderController')
-const MiscController = require('../controllers/MiscController')
-const ShareController = require('../controllers/ShareController')
+import LibraryController from '../controllers/LibraryController.js'
+import UserController from '../controllers/UserController.js'
+import CollectionController from '../controllers/CollectionController.js'
+import PlaylistController from '../controllers/PlaylistController.js'
+import MeController from '../controllers/MeController.js'
+import BackupController from '../controllers/BackupController.js'
+import LibraryItemController from '../controllers/LibraryItemController.js'
+import SeriesController from '../controllers/SeriesController.js'
+import FileSystemController from '../controllers/FileSystemController.js'
+import AuthorController from '../controllers/AuthorController.js'
+import SessionController from '../controllers/SessionController.js'
+import PodcastController from '../controllers/PodcastController.js'
+import NotificationController from '../controllers/NotificationController.js'
+import EmailController from '../controllers/EmailController.js'
+import SearchController from '../controllers/SearchController.js'
+import CacheController from '../controllers/CacheController.js'
+import ToolsController from '../controllers/ToolsController.js'
+import RSSFeedController from '../controllers/RSSFeedController.js'
+import CustomMetadataProviderController from '../controllers/CustomMetadataProviderController.js'
+import MiscController from '../controllers/MiscController.js'
+import ShareController from '../controllers/ShareController.js'
 
-const { getTitleIgnorePrefix } = require('../utils/index')
+import { getTitleIgnorePrefix } from '../utils/index.js'
 
-class ApiRouter {
+export default class ApiRouter {
   constructor(Server) {
     /** @type {import('../Auth')} */
     this.auth = Server.auth
@@ -693,4 +693,3 @@ class ApiRouter {
     }
   }
 }
-module.exports = ApiRouter

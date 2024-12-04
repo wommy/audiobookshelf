@@ -1,6 +1,6 @@
-const uuidv4 = require("uuid").v4
+import { v4 as uuidv4 } from 'uuid'
 
-class Playlist {
+export default class Playlist {
   constructor(playlist) {
     this.id = null
     this.libraryId = null
@@ -145,4 +145,3 @@ class Playlist {
     this.items = this.items.filter(i => i.libraryItemId !== libraryItemId)
   }
 }
-module.exports = Playlist

@@ -1,26 +1,26 @@
-const uuidv4 = require('uuid').v4
-const Path = require('path')
-const sequelize = require('sequelize')
-const { LogLevel } = require('../utils/constants')
-const { getTitleIgnorePrefix, areEquivalent } = require('../utils/index')
-const parseNameString = require('../utils/parsers/parseNameString')
-const parseEbookMetadata = require('../utils/parsers/parseEbookMetadata')
-const globals = require('../utils/globals')
-const AudioFileScanner = require('./AudioFileScanner')
-const Database = require('../Database')
-const { readTextFile, filePathToPOSIX, getFileTimestampsWithIno } = require('../utils/fileUtils')
-const AudioFile = require('../objects/files/AudioFile')
-const CoverManager = require('../managers/CoverManager')
-const LibraryFile = require('../objects/files/LibraryFile')
-const SocketAuthority = require('../SocketAuthority')
-const fsExtra = require('../libs/fsExtra')
-const BookFinder = require('../finders/BookFinder')
+import { v4 as uuidv4 } from 'uuid'
+import Path from 'node:path'
+import sequelize from 'sequelize'
+import { LogLevel } from '../utils/constants.js'
+import { getTitleIgnorePrefix, areEquivalent } from '../utils/index.js'
+import * as parseNameString from '../utils/parsers/parseNameString.js'
+import * as parseEbookMetadata from '../utils/parsers/parseEbookMetadata.js'
+import globals from '../utils/globals.js'
+import AudioFileScanner from './AudioFileScanner.js'
+import Database from '../Database.js'
+import { readTextFile, filePathToPOSIX, getFileTimestampsWithIno } from '../utils/fileUtils.js'
+import AudioFile from '../objects/files/AudioFile.js'
+import CoverManager from '../managers/CoverManager.js'
+import LibraryFile from '../objects/files/LibraryFile.js'
+import SocketAuthority from '../SocketAuthority.js'
+import fsExtra from 'fs-extra'
+import BookFinder from '../finders/BookFinder.js'
 
-const LibraryScan = require('./LibraryScan')
-const OpfFileScanner = require('./OpfFileScanner')
-const NfoFileScanner = require('./NfoFileScanner')
-const AbsMetadataFileScanner = require('./AbsMetadataFileScanner')
-const EBookFile = require('../objects/files/EBookFile')
+import LibraryScan from './LibraryScan.js'
+import OpfFileScanner from './OpfFileScanner.js'
+import NfoFileScanner from './NfoFileScanner.js'
+import AbsMetadataFileScanner from './AbsMetadataFileScanner.js'
+import EBookFile from '../objects/files/EBookFile.js'
 
 /**
  * Metadata for books pulled from files
@@ -982,4 +982,4 @@ class BookScanner {
     return null
   }
 }
-module.exports = new BookScanner()
+export default new BookScanner()

@@ -1,14 +1,38 @@
-const Path = require('path')
-const { Sequelize, Op } = require('sequelize')
+import Path from 'node:path'
+import { Sequelize, Op } from 'sequelize'
 
-const packageJson = require('../package.json')
-const fs = require('./libs/fsExtra')
-const Logger = require('./Logger')
+import packageJson from '../package.json' with { type: 'json' }
+import fs from 'fs-extra'
+import Logger from './Logger.js'
 
-const dbMigration = require('./utils/migrations/dbMigration')
-const Auth = require('./Auth')
+import * as dbMigration from './utils/migrations/dbMigration.js'
+import Auth from './Auth.js'
 
-const MigrationManager = require('./managers/MigrationManager')
+import MigrationManager from './managers/MigrationManager.js'
+
+import User from './models/User.js'
+import Library from './models/Library.js'
+import LibraryFolder from './models/LibraryFolder.js'
+import Book from './models/Book.js'
+import Podcast from './models/Podcast.js'
+import PodcastEpisode from './models/PodcastEpisode.js'
+import LibraryItem from './models/LibraryItem.js'
+import MediaProgress from './models/MediaProgress.js'
+import Series from './models/Series.js'
+import BookSeries from './models/BookSeries.js'
+import Author from './models/Author.js'
+import BookAuthor from './models/BookAuthor.js'
+import Collection from './models/Collection.js'
+import CollectionBook from './models/CollectionBook.js'
+import Playlist from './models/Playlist.js'
+import PlaylistMediaItem from './models/PlaylistMediaItem.js'
+import Device from './models/Device.js'
+import PlaybackSession from './models/PlaybackSession.js'
+import Feed from './models/Feed.js'
+import FeedEpisode from './models/FeedEpisode.js'
+import Setting from './models/Setting.js'
+import CustomMetadataProvider from './models/CustomMetadataProvider.js'
+import MediaItemShare from './models/MediaItemShare.js'
 
 class Database {
   constructor() {
@@ -282,29 +306,29 @@ class Database {
   }
 
   buildModels(force = false) {
-    require('./models/User').init(this.sequelize)
-    require('./models/Library').init(this.sequelize)
-    require('./models/LibraryFolder').init(this.sequelize)
-    require('./models/Book').init(this.sequelize)
-    require('./models/Podcast').init(this.sequelize)
-    require('./models/PodcastEpisode').init(this.sequelize)
-    require('./models/LibraryItem').init(this.sequelize)
-    require('./models/MediaProgress').init(this.sequelize)
-    require('./models/Series').init(this.sequelize)
-    require('./models/BookSeries').init(this.sequelize)
-    require('./models/Author').init(this.sequelize)
-    require('./models/BookAuthor').init(this.sequelize)
-    require('./models/Collection').init(this.sequelize)
-    require('./models/CollectionBook').init(this.sequelize)
-    require('./models/Playlist').init(this.sequelize)
-    require('./models/PlaylistMediaItem').init(this.sequelize)
-    require('./models/Device').init(this.sequelize)
-    require('./models/PlaybackSession').init(this.sequelize)
-    require('./models/Feed').init(this.sequelize)
-    require('./models/FeedEpisode').init(this.sequelize)
-    require('./models/Setting').init(this.sequelize)
-    require('./models/CustomMetadataProvider').init(this.sequelize)
-    require('./models/MediaItemShare').init(this.sequelize)
+    User.init(this.sequelize)
+    Library.init(this.sequelize)
+    LibraryFolder.init(this.sequelize)
+    Book.init(this.sequelize)
+    Podcast.init(this.sequelize)
+    PodcastEpisode.init(this.sequelize)
+    LibraryItem.init(this.sequelize)
+    MediaProgress.init(this.sequelize)
+    Series.init(this.sequelize)
+    BookSeries.init(this.sequelize)
+    Author.init(this.sequelize)
+    BookAuthor.init(this.sequelize)
+    Collection.init(this.sequelize)
+    CollectionBook.init(this.sequelize)
+    Playlist.init(this.sequelize)
+    PlaylistMediaItem.init(this.sequelize)
+    Device.init(this.sequelize)
+    PlaybackSession.init(this.sequelize)
+    Feed.init(this.sequelize)
+    FeedEpisode.init(this.sequelize)
+    Setting.init(this.sequelize)
+    CustomMetadataProvider.init(this.sequelize)
+    MediaItemShare.init(this.sequelize)
 
     return this.sequelize.sync({ force, alter: false })
   }
@@ -805,4 +829,4 @@ class Database {
   }
 }
 
-module.exports = new Database()
+export default new Database()

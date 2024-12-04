@@ -1,13 +1,13 @@
-const Path = require('path')
-const uuidv4 = require('uuid').v4
-const fs = require('../libs/fsExtra')
-const date = require('../libs/dateAndTime')
+import Path from 'node:path'
+import { v4 as uuidv4 } from 'uuid'
+import fs from 'fs-extra'
+import date from 'date-and-time'
 
-const Logger = require('../Logger')
-const { LogLevel } = require('../utils/constants')
-const { secondsToTimestamp, elapsedPretty } = require('../utils/index')
+import Logger from '../Logger.js'
+import { LogLevel } from '../utils/constants.js'
+import { secondsToTimestamp, elapsedPretty } from '../utils/index.js'
 
-class LibraryScan {
+export default class LibraryScan {
   constructor() {
     this.id = null
     this.type = null
@@ -149,4 +149,3 @@ class LibraryScan {
     Logger.info(`[LibraryScan] Scan log saved "${outputPath}"`)
   }
 }
-module.exports = LibraryScan

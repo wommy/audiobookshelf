@@ -1,8 +1,8 @@
-const Path = require('path')
-const { filePathToPOSIX } = require('./fileUtils')
-const globals = require('./globals')
-const LibraryFile = require('../objects/files/LibraryFile')
-const parseNameString = require('./parsers/parseNameString')
+import Path from 'node:path'
+import { filePathToPOSIX } from './fileUtils.js'
+import globals from './globals.js'
+import LibraryFile from '../objects/files/LibraryFile.js'
+import * as parseNameString from './parsers/parseNameString.js'
 
 /**
  * @typedef LibraryItemFilenameMetadata
@@ -24,13 +24,12 @@ function isMediaFile(mediaType, ext, audiobooksOnly = false) {
   return globals.SupportedAudioTypes.includes(extclean) || globals.SupportedEbookTypes.includes(extclean)
 }
 
-function checkFilepathIsAudioFile(filepath) {
+export function checkFilepathIsAudioFile(filepath) {
   const ext = Path.extname(filepath)
   if (!ext) return false
   const extclean = ext.slice(1).toLowerCase()
   return globals.SupportedAudioTypes.includes(extclean)
 }
-module.exports.checkFilepathIsAudioFile = checkFilepathIsAudioFile
 
 /**
  * TODO: Function needs to be re-done
@@ -38,7 +37,7 @@ module.exports.checkFilepathIsAudioFile = checkFilepathIsAudioFile
  * @param {string[]} paths array of relative file paths
  * @returns {Record<string,string[]>} map of files grouped into potential libarary item dirs
  */
-function groupFilesIntoLibraryItemPaths(mediaType, paths) {
+export function groupFilesIntoLibraryItemPaths(mediaType, paths) {
   // Step 1: Clean path, Remove leading "/", Filter out non-media files in root dir
   var nonMediaFilePaths = []
   var pathsFiltered = paths
@@ -131,7 +130,6 @@ function groupFilesIntoLibraryItemPaths(mediaType, paths) {
 
   return itemGroup
 }
-module.exports.groupFilesIntoLibraryItemPaths = groupFilesIntoLibraryItemPaths
 
 /**
  * @param {string} mediaType
@@ -139,7 +137,7 @@ module.exports.groupFilesIntoLibraryItemPaths = groupFilesIntoLibraryItemPaths
  * @param {boolean} [audiobooksOnly=false]
  * @returns {Record<string,string[]>} map of files grouped into potential libarary item dirs
  */
-function groupFileItemsIntoLibraryItemDirs(mediaType, fileItems, audiobooksOnly = false) {
+export function groupFileItemsIntoLibraryItemDirs(mediaType, fileItems, audiobooksOnly = false) {
   // Step 1: Filter out non-book-media files in root dir (with depth of 0)
   const itemsFiltered = fileItems.filter((i) => {
     return i.deep > 0 || (mediaType === 'book' && isMediaFile(mediaType, i.extension, audiobooksOnly))
@@ -208,7 +206,6 @@ function groupFileItemsIntoLibraryItemDirs(mediaType, fileItems, audiobooksOnly 
   })
   return libraryItemGroup
 }
-module.exports.groupFileItemsIntoLibraryItemDirs = groupFileItemsIntoLibraryItemDirs
 
 /**
  * Get LibraryFile from filepath
@@ -216,7 +213,7 @@ module.exports.groupFileItemsIntoLibraryItemDirs = groupFileItemsIntoLibraryItem
  * @param {string[]} files
  * @returns {import('../objects/files/LibraryFile')}
  */
-function buildLibraryFile(libraryItemPath, files) {
+export function buildLibraryFile(libraryItemPath, files) {
   return Promise.all(
     files.map(async (file) => {
       const filePath = Path.posix.join(libraryItemPath, file)
@@ -226,7 +223,6 @@ function buildLibraryFile(libraryItemPath, files) {
     })
   )
 }
-module.exports.buildLibraryFile = buildLibraryFile
 
 /**
  * Get details parsed from filenames
@@ -235,7 +231,7 @@ module.exports.buildLibraryFile = buildLibraryFile
  * @param {boolean} parseSubtitle
  * @returns {LibraryItemFilenameMetadata}
  */
-function getBookDataFromDir(relPath, parseSubtitle = false) {
+export function getBookDataFromDir(relPath, parseSubtitle = false) {
   const splitDir = relPath.split('/')
 
   var folder = splitDir.pop() // Audio files will always be in the directory named for the title
@@ -260,7 +256,6 @@ function getBookDataFromDir(relPath, parseSubtitle = false) {
     publishedYear
   }
 }
-module.exports.getBookDataFromDir = getBookDataFromDir
 
 /**
  * Extract narrator from folder name
@@ -385,7 +380,7 @@ function getPodcastDataFromDir(relPath) {
  * @param {string} relPath
  * @returns {{ mediaMetadata: LibraryItemFilenameMetadata, relPath: string, path: string}}
  */
-function getDataFromMediaDir(libraryMediaType, folderPath, relPath) {
+export function getDataFromMediaDir(libraryMediaType, folderPath, relPath) {
   relPath = filePathToPOSIX(relPath)
   let fullPath = Path.posix.join(folderPath, relPath)
   let mediaMetadata = null
@@ -403,4 +398,3 @@ function getDataFromMediaDir(libraryMediaType, folderPath, relPath) {
     path: fullPath
   }
 }
-module.exports.getDataFromMediaDir = getDataFromMediaDir

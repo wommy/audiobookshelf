@@ -1,4 +1,4 @@
-class TrackProgressMonitor {
+export default class TrackProgressMonitor {
   /**
    * @callback TrackStartedCallback
    * @param {number} trackIndex - The index of the track that started.
@@ -85,4 +85,3 @@ class TrackProgressMonitor {
     this.update(101)
   }
 }
-module.exports = TrackProgressMonitor

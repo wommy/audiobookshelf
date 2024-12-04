@@ -1,18 +1,18 @@
-const EventEmitter = require('events')
-const Path = require('path')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
+import EventEmitter from 'node:events'
+import Path from 'node:path'
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
 
-const fs = require('../libs/fsExtra')
-const Ffmpeg = require('../libs/fluentFfmpeg')
+import fs from 'fs-extra'
+import Ffmpeg from 'fluent-ffmpeg'
 
-const { secondsToTimestamp } = require('../utils/index')
-const { writeConcatFile } = require('../utils/ffmpegHelpers')
-const { AudioMimeType } = require('../utils/constants')
-const hlsPlaylistGenerator = require('../utils/generators/hlsPlaylistGenerator')
-const AudioTrack = require('./files/AudioTrack')
+import { secondsToTimestamp } from '../utils/index.js'
+import { writeConcatFile } from '../utils/ffmpegHelpers.js'
+import { AudioMimeType } from '../utils/constants.js'
+import hlsPlaylistGenerator from '../utils/generators/hlsPlaylistGenerator.js'
+import AudioTrack from './files/AudioTrack.js'
 
-class Stream extends EventEmitter {
+export default class Stream extends EventEmitter {
   constructor(sessionId, streamPath, user, libraryItem, episodeId, startTime, transcodeOptions = {}) {
     super()
 
@@ -419,4 +419,3 @@ class Stream extends EventEmitter {
     return newAudioTrack
   }
 }
-module.exports = Stream

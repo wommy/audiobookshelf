@@ -1,9 +1,9 @@
-const Path = require('path')
-const uuidv4 = require('uuid').v4
-const { sanitizeFilename, filePathToPOSIX } = require('../utils/fileUtils')
-const globals = require('../utils/globals')
+import Path from 'node:path'
+import { v4 as uuidv4 } from 'uuid'
+import { sanitizeFilename, filePathToPOSIX } from '../utils/fileUtils.js'
+import globals from '../utils/globals.js'
 
-class PodcastEpisodeDownload {
+export default class PodcastEpisodeDownload {
   constructor() {
     this.id = null
     this.podcastEpisode = null
@@ -93,4 +93,3 @@ class PodcastEpisodeDownload {
     this.failed = !success
   }
 }
-module.exports = PodcastEpisodeDownload

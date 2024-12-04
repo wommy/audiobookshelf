@@ -1,9 +1,10 @@
-const { Request, Response, NextFunction } = require('express')
-const Path = require('path')
-const fs = require('../libs/fsExtra')
-const Logger = require('../Logger')
-const Database = require('../Database')
-const fileUtils = require('../utils/fileUtils')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import Path from 'node:path'
+import fs from 'fs-extra'
+import Logger from '../Logger.js'
+import Database from '../Database.js'
+import * as fileUtils from '../utils/fileUtils.js'
 
 /**
  * @typedef RequestUserObject
@@ -177,4 +178,4 @@ class BackupController {
     next()
   }
 }
-module.exports = new BackupController()
+export default new BackupController()

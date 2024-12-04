@@ -1,10 +1,10 @@
-const Path = require('path')
-const date = require('../libs/dateAndTime')
-const fs = require('../libs/fsExtra')
-const fileUtils = require('../utils/fileUtils')
-const Logger = require('../Logger')
+import Path from 'node:path'
+import date from 'date-and-time'
+import fs from 'fs-extra'
+import * as fileUtils from '../utils/fileUtils.js'
+import Logger from '../Logger.js'
 
-class DailyLog {
+export default class DailyLog {
   /**
    * 
    * @param {string} dailyLogDirPath Path to daily logs /metadata/logs/daily
@@ -132,4 +132,3 @@ class DailyLog {
     Logger.debug(`[DailyLog] ${this.id}: Loaded ${this.logs.length} Logs`)
   }
 }
-module.exports = DailyLog

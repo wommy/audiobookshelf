@@ -1,9 +1,9 @@
-const Path = require('path')
-const uuidv4 = require('uuid').v4
-const date = require('../libs/dateAndTime')
-const { secondsToTimestamp } = require('../utils/index')
+import Path from 'node:path'
+import { v4 as uuidv4 } from 'uuid'
+import date from 'date-and-time'
+import { secondsToTimestamp } from '../utils/index.js'
 
-class FeedEpisode {
+export default class FeedEpisode {
   constructor(episode) {
     this.id = null
 
@@ -174,4 +174,3 @@ class FeedEpisode {
     }
   }
 }
-module.exports = FeedEpisode

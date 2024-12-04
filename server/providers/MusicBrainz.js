@@ -1,10 +1,10 @@
-const axios = require('axios')
-const packageJson = require('../../package.json')
-const Logger = require('../Logger')
-const { isNullOrNaN } = require('../utils/index')
+import axios from 'axios'
+import packageJson from '../../package.json' with { type: 'json' }
+import Logger from '../Logger.js'
+import { isNullOrNaN } from '../utils/index.js'
 
-class MusicBrainz {
-  constructor() { }
+export default class MusicBrainz {
+  constructor() {}
 
   get userAgentString() {
     return `audiobookshelf/${packageJson.version} (https://audiobookshelf.org)`
@@ -48,4 +48,3 @@ class MusicBrainz {
     })
   }
 }
-module.exports = MusicBrainz

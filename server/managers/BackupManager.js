@@ -1,23 +1,23 @@
-const sqlite3 = require('sqlite3')
-const Path = require('path')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
+import sqlite3 from 'sqlite3'
+import Path from 'node:path'
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
 
-const cron = require('../libs/nodeCron')
-const fs = require('../libs/fsExtra')
-const archiver = require('../libs/archiver')
-const StreamZip = require('../libs/nodeStreamZip')
-const fileUtils = require('../utils/fileUtils')
+import * as cron from 'node-cron'
+import fs from 'fs-extra'
+import archiver from 'archiver'
+import StreamZip from 'node-stream-zip'
 
 // Utils
-const { getFileSize } = require('../utils/fileUtils')
+import * as fileUtils from '../utils/fileUtils.js'
+import { getFileSize } from '../utils/fileUtils.js'
 
-const Backup = require('../objects/Backup')
-const CacheManager = require('./CacheManager')
-const NotificationManager = require('./NotificationManager')
+import Backup from '../objects/Backup.js'
+import CacheManager from './CacheManager.js'
+import NotificationManager from './NotificationManager.js'
 
-class BackupManager {
+export default class BackupManager {
   constructor() {
     this.ItemsMetadataPath = Path.join(global.MetadataPath, 'items')
     this.AuthorsMetadataPath = Path.join(global.MetadataPath, 'authors')
@@ -460,4 +460,3 @@ class BackupManager {
     })
   }
 }
-module.exports = BackupManager

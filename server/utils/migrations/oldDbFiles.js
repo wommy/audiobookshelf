@@ -1,10 +1,10 @@
-const { once } = require('events')
-const { createInterface } = require('readline')
-const Path = require('path')
-const Logger = require('../../Logger')
-const fs = require('../../libs/fsExtra')
-const archiver = require('../../libs/archiver')
-const StreamZip = require('../../libs/nodeStreamZip')
+import { once } from 'node:events'
+import { createInterface } from 'node:readline'
+import Path from 'node:path'
+import Logger from '../../Logger.js'
+import fs from 'fs-extra'
+import archiver from 'archiver'
+import StreamZip from 'node-stream-zip'
 
 async function processDbFile(filepath) {
   if (!fs.pathExistsSync(filepath)) {
@@ -71,14 +71,14 @@ async function loadDbData(dbpath) {
   }
 }
 
-module.exports.loadOldData = async (dbName) => {
+export const loadOldData = async (dbName) => {
   const dbPath = Path.join(global.ConfigPath, dbName, 'data')
   const dbData = await loadDbData(dbPath) || []
   Logger.info(`[oldDbFiles] ${dbData.length} ${dbName} loaded`)
   return dbData
 }
 
-module.exports.zipWrapOldDb = async () => {
+export const zipWrapOldDb = async () => {
   const dbs = {
     libraryItems: Path.join(global.ConfigPath, 'libraryItems'),
     users: Path.join(global.ConfigPath, 'users'),
@@ -138,7 +138,7 @@ module.exports.zipWrapOldDb = async () => {
   })
 }
 
-module.exports.checkHasOldDb = async () => {
+export const checkHasOldDb = async () => {
   const dbs = {
     libraryItems: Path.join(global.ConfigPath, 'libraryItems'),
     users: Path.join(global.ConfigPath, 'users'),
@@ -159,7 +159,7 @@ module.exports.checkHasOldDb = async () => {
   return false
 }
 
-module.exports.checkHasOldDbZip = async () => {
+export const checkHasOldDbZip = async () => {
   const oldDbPath = Path.join(global.ConfigPath, 'oldDb.zip')
   if (!await fs.pathExists(oldDbPath)) {
     return false
@@ -177,7 +177,7 @@ module.exports.checkHasOldDbZip = async () => {
  * Used for migration from 2.3.0 -> 2.3.1
  * @returns {boolean} true if extracted
  */
-module.exports.checkExtractItemsUsersAndLibraries = async () => {
+export const checkExtractItemsUsersAndLibraries = async () => {
   const oldDbPath = Path.join(global.ConfigPath, 'oldDb.zip')
 
   const zip = new StreamZip.async({ file: oldDbPath })
@@ -216,7 +216,7 @@ module.exports.checkExtractItemsUsersAndLibraries = async () => {
 /**
  * Used for migration from 2.3.0 -> 2.3.1
  */
-module.exports.removeOldItemsUsersAndLibrariesFolders = async () => {
+export const removeOldItemsUsersAndLibrariesFolders = async () => {
   const libraryItemsPath = Path.join(global.ConfigPath, 'libraryItems')
   const usersPath = Path.join(global.ConfigPath, 'users')
   const librariesPath = Path.join(global.ConfigPath, 'libraries')

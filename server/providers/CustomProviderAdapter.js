@@ -1,8 +1,8 @@
-const axios = require('axios').default
-const Database = require('../Database')
-const Logger = require('../Logger')
+import axios from 'axios'
+import Database from '../Database.js'
+import Logger from '../Logger.js'
 
-class CustomProviderAdapter {
+export default class CustomProviderAdapter {
   #responseTimeout = 30000
 
   constructor() {}
@@ -87,5 +87,3 @@ class CustomProviderAdapter {
     })
   }
 }
-
-module.exports = CustomProviderAdapter

@@ -1,15 +1,16 @@
-const { Request, Response } = require('express')
-const uuid = require('uuid')
-const Path = require('path')
-const { Op } = require('sequelize')
-const Logger = require('../Logger')
-const Database = require('../Database')
+import express from 'express'
+const { Request, Response } = express
+import * as uuid from 'uuid'
+import Path from 'node:path'
+import { Op } from 'sequelize'
+import Logger from '../Logger.js'
+import Database from '../Database.js'
 
-const { PlayMethod } = require('../utils/constants')
-const { getAudioMimeTypeFromExtname, encodeUriPath } = require('../utils/fileUtils')
+import { PlayMethod } from '../utils/constants.js'
+import { getAudioMimeTypeFromExtname, encodeUriPath } from '../utils/fileUtils.js'
 
-const PlaybackSession = require('../objects/PlaybackSession')
-const ShareManager = require('../managers/ShareManager')
+import PlaybackSession from '../objects/PlaybackSession.js'
+import ShareManager from '../managers/ShareManager.js'
 
 /**
  * @typedef RequestUserObject
@@ -339,4 +340,4 @@ class ShareController {
     }
   }
 }
-module.exports = new ShareController()
+export default new ShareController()

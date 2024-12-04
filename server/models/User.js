@@ -1,9 +1,9 @@
-const uuidv4 = require('uuid').v4
-const sequelize = require('sequelize')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const { isNullOrNaN } = require('../utils')
-const { LRUCache } = require('lru-cache')
+import { v4 as uuidv4 } from 'uuid'
+import sequelize from 'sequelize'
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import { isNullOrNaN } from '../utils/index.js'
+import { LRUCache } from 'lru-cache'
 
 class UserCache {
   constructor() {
@@ -78,7 +78,7 @@ const { DataTypes, Model } = sequelize
  * @property {number} [markAsFinishedPercentComplete]
  */
 
-class User extends Model {
+export default class User extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -907,5 +907,3 @@ class User extends Model {
     await super.destroy(options)
   }
 }
-
-module.exports = User

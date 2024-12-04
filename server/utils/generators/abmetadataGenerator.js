@@ -1,5 +1,5 @@
-const Logger = require('../../Logger')
-const parseSeriesString = require('../parsers/parseSeriesString')
+import Logger from '../../Logger.js'
+import { parse as parseSeriesString } from '../parsers/parseSeriesString.js'
 
 function parseJsonMetadataText(text) {
   try {
@@ -46,7 +46,7 @@ function parseJsonMetadataText(text) {
     return null
   }
 }
-module.exports.parseJson = parseJsonMetadataText
+export const parseJson = parseJsonMetadataText
 
 function cleanChaptersArray(chaptersArray, mediaTitle) {
   const chapters = []

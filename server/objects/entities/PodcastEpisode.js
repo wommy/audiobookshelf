@@ -1,9 +1,9 @@
-const uuidv4 = require('uuid').v4
-const { areEquivalent, copyValue } = require('../../utils/index')
-const AudioFile = require('../files/AudioFile')
-const AudioTrack = require('../files/AudioTrack')
+import { v4 as uuidv4 } from 'uuid'
+import { areEquivalent, copyValue } from '../../utils/index.js'
+import AudioFile from '../files/AudioFile.js'
+import AudioTrack from '../files/AudioTrack.js'
 
-class PodcastEpisode {
+export default class PodcastEpisode {
   constructor(episode) {
     this.libraryItemId = null
     this.podcastId = null
@@ -183,4 +183,3 @@ class PodcastEpisode {
     return this.enclosure.url == url
   }
 }
-module.exports = PodcastEpisode

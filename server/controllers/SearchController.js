@@ -1,10 +1,11 @@
-const { Request, Response } = require('express')
-const Logger = require('../Logger')
-const BookFinder = require('../finders/BookFinder')
-const PodcastFinder = require('../finders/PodcastFinder')
-const AuthorFinder = require('../finders/AuthorFinder')
-const Database = require('../Database')
-const { isValidASIN } = require('../utils')
+import express from 'express'
+const { Request, Response } = express
+import Logger from '../Logger.js'
+import BookFinder from '../finders/BookFinder.js'
+import PodcastFinder from '../finders/PodcastFinder.js'
+import AuthorFinder from '../finders/AuthorFinder.js'
+import Database from '../Database.js'
+import { isValidASIN } from '../utils/index.js'
 
 /**
  * @typedef RequestUserObject
@@ -118,4 +119,4 @@ class SearchController {
     res.json(chapterData)
   }
 }
-module.exports = new SearchController()
+export default new SearchController()

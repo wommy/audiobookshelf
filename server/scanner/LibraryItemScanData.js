@@ -1,9 +1,9 @@
-const packageJson = require('../../package.json')
-const { LogLevel } = require('../utils/constants')
-const LibraryItem = require('../models/LibraryItem')
-const globals = require('../utils/globals')
+import packageJson from '../../package.json' with { type: 'json' }
+import { LogLevel } from '../utils/constants.js'
+import LibraryItem from '../models/LibraryItem.js'
+import globals from '../utils/globals.js'
 
-class LibraryItemScanData {
+export default class LibraryItemScanData {
   /**
    * @typedef LibraryFileModifiedObject
    * @property {LibraryItem.LibraryFileObject} old
@@ -374,4 +374,3 @@ class LibraryItemScanData {
     }
   }
 }
-module.exports = LibraryItemScanData

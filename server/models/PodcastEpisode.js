@@ -1,5 +1,5 @@
-const { DataTypes, Model } = require('sequelize')
-const oldPodcastEpisode = require('../objects/entities/PodcastEpisode')
+import { DataTypes, Model } from 'sequelize'
+import oldPodcastEpisode from '../objects/entities/PodcastEpisode.js'
 
 /**
  * @typedef ChapterObject
@@ -9,7 +9,7 @@ const oldPodcastEpisode = require('../objects/entities/PodcastEpisode')
  * @property {string} title
  */
 
-class PodcastEpisode extends Model {
+export default class PodcastEpisode extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -171,5 +171,3 @@ class PodcastEpisode extends Model {
     PodcastEpisode.belongsTo(podcast)
   }
 }
-
-module.exports = PodcastEpisode

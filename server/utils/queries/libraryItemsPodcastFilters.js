@@ -1,8 +1,8 @@
-const Sequelize = require('sequelize')
-const Database = require('../../Database')
-const Logger = require('../../Logger')
+import Sequelize from 'sequelize'
+import Database from '../../Database.js'
+import Logger from '../../Logger.js'
 
-module.exports = {
+export default {
   /**
    * User permissions to restrict podcasts for explicit content & tags
    * @param {import('../../models/User')} user

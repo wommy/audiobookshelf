@@ -1,9 +1,9 @@
-const nodemailer = require('nodemailer')
-const Database = require('../Database')
-const Logger = require("../Logger")
+import nodemailer from 'nodemailer'
+import Database from '../Database.js'
+import Logger from '../Logger.js'
 
-class EmailManager {
-  constructor() { }
+export default class EmailManager {
+  constructor() {}
 
   getTransporter() {
     return nodemailer.createTransport(Database.emailSettings.getTransportObject())
@@ -69,4 +69,3 @@ class EmailManager {
     })
   }
 }
-module.exports = EmailManager

@@ -1,9 +1,9 @@
-const server = require('./server/Server')
-global.appRoot = __dirname
+import server from './server/Server.js'
+global.appRoot = import.meta.dirname
 
 const isDev = process.env.NODE_ENV !== 'production'
 if (isDev) {
-  const devEnv = require('./dev').config
+  const devEnv = (await import('./dev.js')).config
   if (devEnv.Port) process.env.PORT = devEnv.Port
   if (devEnv.ConfigPath) process.env.CONFIG_PATH = devEnv.ConfigPath
   if (devEnv.MetadataPath) process.env.METADATA_PATH = devEnv.MetadataPath

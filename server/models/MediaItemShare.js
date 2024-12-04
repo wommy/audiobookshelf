@@ -1,4 +1,4 @@
-const { DataTypes, Model } = require('sequelize')
+import { DataTypes, Model } from 'sequelize'
 
 /**
  * @typedef MediaItemShareObject
@@ -27,7 +27,7 @@ const { DataTypes, Model } = require('sequelize')
  * @property {Date} updatedAt
  */
 
-class MediaItemShare extends Model {
+export default class MediaItemShare extends Model {
   constructor(values, options) {
     super(values, options)
   }
@@ -167,5 +167,3 @@ class MediaItemShare extends Model {
     })
   }
 }
-
-module.exports = MediaItemShare

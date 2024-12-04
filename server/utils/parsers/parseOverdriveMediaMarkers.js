@@ -1,5 +1,5 @@
-const xml2js = require('xml2js')
-const Logger = require('../../Logger')
+import xml2js from 'xml2js'
+import Logger from '../../Logger.js'
 
 // given the array of Overdrive Media Markers from generateOverdriveMediaMarkers()
 //  parse and clean them in to something a bit more usable
@@ -139,7 +139,7 @@ function generateParsedChapters(includedAudioFiles, cleanedOverdriveMediaMarkers
   return parsedChapters
 }
 
-module.exports.parseOverdriveMediaMarkersAsChapters = (includedAudioFiles) => {
+export const parseOverdriveMediaMarkersAsChapters = (includedAudioFiles) => {
   const overdriveMediaMarkers = includedAudioFiles.map((af) => af.metaTags.tagOverdriveMediaMarker).filter((af) => af) || []
   if (!overdriveMediaMarkers.length) return null
 

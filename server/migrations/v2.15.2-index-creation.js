@@ -90,4 +90,4 @@ async function down({ context: { queryInterface, logger } }) {
   logger.info('[2.15.2 migration] DOWNGRADE END: 2.15.2-index-creation')
 }
 
-module.exports = { up, down }
+export default { up, down }
