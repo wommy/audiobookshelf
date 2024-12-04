@@ -1,11 +1,11 @@
-const Sequelize = require('sequelize')
-const Database = require('../../Database')
-const Logger = require('../../Logger')
-const authorFilters = require('./authorFilters')
+import Sequelize from 'sequelize'
+import Database from '../../Database.js'
+import Logger from '../../Logger.js'
+import authorFilters from './authorFilters.js'
 
-const ShareManager = require('../../managers/ShareManager')
+import ShareManager from '../../managers/ShareManager.js'
 
-module.exports = {
+export default {
   /**
    * User permissions to restrict books for explicit content & tags
    * @param {import('../../models/User')} user

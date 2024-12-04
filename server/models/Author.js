@@ -1,7 +1,7 @@
-const { DataTypes, Model, where, fn, col } = require('sequelize')
-const parseNameString = require('../utils/parsers/parseNameString')
+import { DataTypes, Model, where, fn, col } from 'sequelize'
+import * as parseNameString from '../utils/parsers/parseNameString.js'
 
-class Author extends Model {
+export default class Author extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -188,4 +188,3 @@ class Author extends Model {
     }
   }
 }
-module.exports = Author

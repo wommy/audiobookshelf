@@ -1,8 +1,8 @@
-const Logger = require('../../Logger')
-const Notification = require('../Notification')
-const { isNullOrNaN } = require('../../utils')
+import Logger from '../../Logger.js'
+import Notification from '../Notification.js'
+import { isNullOrNaN } from '../../utils/index.js'
 
-class NotificationSettings {
+export default class NotificationSettings {
   constructor(settings = null) {
     this.id = 'notification-settings'
     this.appriseType = 'api'
@@ -115,4 +115,3 @@ class NotificationSettings {
     return notification.update(payload)
   }
 }
-module.exports = NotificationSettings

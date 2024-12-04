@@ -1,15 +1,15 @@
-const util = require('util')
-const Path = require('path')
-const { DataTypes, Model } = require('sequelize')
-const fsExtra = require('../libs/fsExtra')
-const Logger = require('../Logger')
-const oldLibraryItem = require('../objects/LibraryItem')
-const libraryFilters = require('../utils/queries/libraryFilters')
-const { areEquivalent } = require('../utils/index')
-const { filePathToPOSIX, getFileTimestampsWithIno } = require('../utils/fileUtils')
-const LibraryFile = require('../objects/files/LibraryFile')
-const Book = require('./Book')
-const Podcast = require('./Podcast')
+import util from 'node:util'
+import Path from 'node:path'
+import { DataTypes, Model } from 'sequelize'
+import fsExtra from 'fs-extra'
+import Logger from '../Logger.js'
+import oldLibraryItem from '../objects/LibraryItem.js'
+import libraryFilters from '../utils/queries/libraryFilters.js'
+import { areEquivalent } from '../utils/index.js'
+import { filePathToPOSIX, getFileTimestampsWithIno } from '../utils/fileUtils.js'
+import LibraryFile from '../objects/files/LibraryFile.js'
+import Book from './Book.js'
+import Podcast from './Podcast.js'
 
 /**
  * @typedef LibraryFileObject
@@ -27,7 +27,7 @@ const Podcast = require('./Podcast')
  * @typedef {LibraryItem & LibraryItemExpandedProperties} LibraryItemExpanded
  */
 
-class LibraryItem extends Model {
+export default class LibraryItem extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -1125,5 +1125,3 @@ class LibraryItem extends Model {
     })
   }
 }
-
-module.exports = LibraryItem

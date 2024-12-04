@@ -1,4 +1,4 @@
-class FileMetadata {
+export default class FileMetadata {
   constructor(metadata) {
     this.filename = null
     this.ext = null
@@ -72,4 +72,3 @@ class FileMetadata {
     }
   }
 }
-module.exports = FileMetadata

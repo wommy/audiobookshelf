@@ -1,22 +1,22 @@
-const uuidv4 = require('uuid').v4
-const Path = require('path')
-const serverVersion = require('../../package.json').version
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
+import { v4 as uuidv4 } from 'uuid'
+import Path from 'node:path'
+import serverVersion from '../../package.json' with { type: 'json' }
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
 
-const date = require('../libs/dateAndTime')
-const fs = require('../libs/fsExtra')
-const uaParserJs = require('../libs/uaParser')
-const requestIp = require('../libs/requestIp')
+import date from 'date-and-time'
+import fs from 'fs-extra'
+import * as uaParserJs from 'ua-parser-js'
+import * as requestIp from 'request-ip'
 
-const { PlayMethod } = require('../utils/constants')
+import { PlayMethod } from '../utils/constants.js'
 
-const PlaybackSession = require('../objects/PlaybackSession')
-const DeviceInfo = require('../objects/DeviceInfo')
-const Stream = require('../objects/Stream')
+import PlaybackSession from '../objects/PlaybackSession.js'
+import DeviceInfo from '../objects/DeviceInfo.js'
+import Stream from '../objects/Stream.js'
 
-class PlaybackSessionManager {
+export default class PlaybackSessionManager {
   constructor() {
     this.StreamsPath = Path.join(global.MetadataPath, 'streams')
 
@@ -466,4 +466,3 @@ class PlaybackSessionManager {
     }
   }
 }
-module.exports = PlaybackSessionManager

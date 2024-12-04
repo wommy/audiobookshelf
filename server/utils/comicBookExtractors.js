@@ -1,11 +1,11 @@
-const Path = require('path')
-const os = require('os')
-const unrar = require('node-unrar-js')
-const Logger = require('../Logger')
-const fs = require('../libs/fsExtra')
-const StreamZip = require('../libs/nodeStreamZip')
-const Archive = require('../libs/libarchive/archive')
-const { isWritable } = require('./fileUtils')
+import Path from 'node:path'
+import os from 'node:os'
+import unrar from 'node-unrar-js'
+import Logger from '../Logger.js'
+import fs from 'fs-extra'
+import StreamZip from 'node-stream-zip'
+// import Archive from 'node-libarchive'
+import { isWritable } from './fileUtils.js'
 
 class AbstractComicBookExtractor {
   constructor(comicPath) {
@@ -194,7 +194,7 @@ class CbzStreamZipComicBookExtractor extends AbstractComicBookExtractor {
   }
 }
 
-function createComicBookExtractor(comicPath) {
+export function createComicBookExtractor(comicPath) {
   const ext = Path.extname(comicPath).toLowerCase()
   if (ext === '.cbr') {
     return new CbrComicBookExtractor(comicPath)
@@ -204,4 +204,3 @@ function createComicBookExtractor(comicPath) {
     throw new Error(`Unsupported comic book format "${ext}"`)
   }
 }
-module.exports = { createComicBookExtractor }

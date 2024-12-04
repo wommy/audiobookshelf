@@ -1,20 +1,20 @@
-const Path = require('path')
-const { LogLevel, ScanResult } = require('../utils/constants')
+import Path from 'node:path'
+import { LogLevel, ScanResult } from '../utils/constants.js'
 
-const fileUtils = require('../utils/fileUtils')
-const scanUtils = require('../utils/scandir')
-const libraryFilters = require('../utils/queries/libraryFilters')
-const Logger = require('../Logger')
-const Database = require('../Database')
-const Watcher = require('../Watcher')
-const LibraryScan = require('./LibraryScan')
-const LibraryItemScanData = require('./LibraryItemScanData')
-const BookScanner = require('./BookScanner')
-const PodcastScanner = require('./PodcastScanner')
-const ScanLogger = require('./ScanLogger')
-const LibraryItem = require('../models/LibraryItem')
-const LibraryFile = require('../objects/files/LibraryFile')
-const SocketAuthority = require('../SocketAuthority')
+import * as fileUtils from '../utils/fileUtils.js'
+import * as scanUtils from '../utils/scandir.js'
+import * as libraryFilters from '../utils/queries/libraryFilters.js'
+import Logger from '../Logger.js'
+import Database from '../Database.js'
+import Watcher from '../Watcher.js'
+import LibraryScan from './LibraryScan.js'
+import LibraryItemScanData from './LibraryItemScanData.js'
+import BookScanner from './BookScanner.js'
+import PodcastScanner from './PodcastScanner.js'
+import ScanLogger from './ScanLogger.js'
+import LibraryItem from '../models/LibraryItem.js'
+import LibraryFile from '../objects/files/LibraryFile.js'
+import SocketAuthority from '../SocketAuthority.js'
 
 class LibraryItemScanner {
   constructor() {}
@@ -214,4 +214,5 @@ class LibraryItemScanner {
     return this.scanNewLibraryItem(libraryItemScanData, library.settings, scanLogger)
   }
 }
-module.exports = new LibraryItemScanner()
+
+export default new LibraryItemScanner()

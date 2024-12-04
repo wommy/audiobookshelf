@@ -1,8 +1,8 @@
-const axios = require('axios')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
-const { notificationData } = require('../utils/notifications')
+import axios from 'axios'
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
+import { notificationData } from '../utils/notifications.js'
 
 class NotificationManager {
   constructor() {
@@ -180,4 +180,4 @@ class NotificationManager {
       })
   }
 }
-module.exports = new NotificationManager()
+export default new NotificationManager()

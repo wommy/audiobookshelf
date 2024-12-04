@@ -1,4 +1,4 @@
-const fs = require('../../libs/fsExtra')
+import fs from 'fs-extra'
 
 function getPlaylistStr(segmentName, duration, segmentLength, hlsSegmentType, token) {
   var ext = hlsSegmentType === 'fmp4' ? 'm4s' : 'ts'
@@ -28,8 +28,7 @@ function getPlaylistStr(segmentName, duration, segmentLength, hlsSegmentType, to
   return lines.join('\n')
 }
 
-function generatePlaylist(outputPath, segmentName, duration, segmentLength, hlsSegmentType, token) {
+export default function generatePlaylist(outputPath, segmentName, duration, segmentLength, hlsSegmentType, token) {
   var playlistStr = getPlaylistStr(segmentName, duration, segmentLength, hlsSegmentType, token)
   return fs.writeFile(outputPath, playlistStr)
 }
-module.exports = generatePlaylist

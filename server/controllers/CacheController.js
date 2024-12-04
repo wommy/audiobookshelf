@@ -1,5 +1,6 @@
-const { Request, Response } = require('express')
-const CacheManager = require('../managers/CacheManager')
+import express from 'express'
+const { Request, Response } = express
+import CacheManager from '../managers/CacheManager.js'
 
 /**
  * @typedef RequestUserObject
@@ -39,4 +40,4 @@ class CacheController {
     res.sendStatus(200)
   }
 }
-module.exports = new CacheController()
+export default new CacheController()

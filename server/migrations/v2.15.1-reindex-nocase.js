@@ -40,4 +40,4 @@ async function down({ context: { queryInterface, logger } }) {
   logger.info('[2.15.1 migration] DOWNGRADE END: 2.15.1-reindex-nocase ')
 }
 
-module.exports = { up, down }
+export default { up, down }

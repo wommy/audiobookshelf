@@ -1,11 +1,11 @@
-const { createNewSortInstance } = require('../libs/fastSort')
-const Database = require('../Database')
-const { getTitlePrefixAtEnd, isNullOrNaN, getTitleIgnorePrefix } = require('../utils/index')
+import { createNewSortInstance } from 'fast-sort'
+import Database from '../Database.js'
+import { getTitlePrefixAtEnd, isNullOrNaN, getTitleIgnorePrefix } from '../utils/index.js'
 const naturalSort = createNewSortInstance({
   comparer: new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare
 })
 
-module.exports = {
+export default {
   getSeriesFromBooks(books, filterSeries, hideSingleBookSeries) {
     const _series = {}
     const seriesToFilterOut = {}

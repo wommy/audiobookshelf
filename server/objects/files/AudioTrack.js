@@ -1,4 +1,4 @@
-class AudioTrack {
+export default class AudioTrack {
   constructor() {
     this.index = null
     this.startOffset = null
@@ -44,4 +44,3 @@ class AudioTrack {
     this.mimeType = 'application/vnd.apple.mpegurl'
   }
 }
-module.exports = AudioTrack

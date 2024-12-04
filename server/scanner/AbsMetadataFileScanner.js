@@ -1,11 +1,11 @@
-const Path = require('path')
-const fsExtra = require('../libs/fsExtra')
-const { readTextFile } = require('../utils/fileUtils')
-const { LogLevel } = require('../utils/constants')
-const abmetadataGenerator = require('../utils/generators/abmetadataGenerator')
+import Path from 'node:path'
+import fsExtra from 'fs-extra'
+import { readTextFile } from '../utils/fileUtils.js'
+import { LogLevel } from '../utils/constants.js'
+import * as abmetadataGenerator from '../utils/generators/abmetadataGenerator.js'
 
 class AbsMetadataFileScanner {
-  constructor() { }
+  constructor() {}
 
   /**
    * Check for metadata.json file and set book metadata
@@ -81,4 +81,5 @@ class AbsMetadataFileScanner {
     }
   }
 }
-module.exports = new AbsMetadataFileScanner()
+
+export default new AbsMetadataFileScanner()

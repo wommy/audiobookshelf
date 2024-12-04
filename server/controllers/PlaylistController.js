@@ -1,9 +1,10 @@
-const { Request, Response, NextFunction } = require('express')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
 
-const Playlist = require('../objects/Playlist')
+import Playlist from '../objects/Playlist.js'
 
 /**
  * @typedef RequestUserObject
@@ -476,4 +477,4 @@ class PlaylistController {
     next()
   }
 }
-module.exports = new PlaylistController()
+export default new PlaylistController()

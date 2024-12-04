@@ -1,9 +1,9 @@
-const Path = require('path')
-const Logger = require('../../Logger')
-const parseComicInfoMetadata = require('./parseComicInfoMetadata')
-const globals = require('../globals')
-const { xmlToJSON } = require('../index')
-const { createComicBookExtractor } = require('../comicBookExtractors.js')
+import Path from 'path'
+import Logger from '../../Logger.js'
+import * as parseComicInfoMetadata from './parseComicInfoMetadata.js'
+import globals from '../globals.js'
+import { xmlToJSON } from '../index.js'
+import { createComicBookExtractor } from '../comicBookExtractors.js'
 
 /**
  * Extract cover image from comic return true if success
@@ -13,7 +13,7 @@ const { createComicBookExtractor } = require('../comicBookExtractors.js')
  * @param {string} outputCoverPath
  * @returns {Promise<boolean>}
  */
-async function extractCoverImage(comicPath, comicImageFilepath, outputCoverPath) {
+export async function extractCoverImage(comicPath, comicImageFilepath, outputCoverPath) {
   let archive = null
   try {
     archive = createComicBookExtractor(comicPath)
@@ -27,7 +27,6 @@ async function extractCoverImage(comicPath, comicImageFilepath, outputCoverPath)
     archive?.close()
   }
 }
-module.exports.extractCoverImage = extractCoverImage
 
 /**
  * Parse metadata from comic
@@ -35,7 +34,7 @@ module.exports.extractCoverImage = extractCoverImage
  * @param {import('../../models/Book').EBookFileObject} ebookFile
  * @returns {Promise<import('./parseEbookMetadata').EBookFileScanData>}
  */
-async function parse(ebookFile) {
+export async function parse(ebookFile) {
   const comicPath = ebookFile.metadata.path
   Logger.debug(`[parseComicMetadata] Parsing comic metadata at "${comicPath}"`)
   let archive = null
@@ -88,4 +87,3 @@ async function parse(ebookFile) {
     archive?.close()
   }
 }
-module.exports.parse = parse

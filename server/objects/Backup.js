@@ -1,8 +1,9 @@
-const Path = require('path')
-const date = require('../libs/dateAndTime')
-const version = require('../../package.json').version
+import Path from 'node:path'
+import date from 'date-and-time'
+import pkg from '../../package.json' with { type: 'json' }
+const { version } = pkg
 
-class Backup {
+export default class Backup {
   constructor(data = null) {
     this.id = null
     this.key = null // Special key for pre-version checks
@@ -78,4 +79,3 @@ class Backup {
     this.createdAt = Date.now()
   }
 }
-module.exports = Backup

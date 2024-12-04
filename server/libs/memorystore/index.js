@@ -8,9 +8,9 @@
 // SOURCE: https://github.com/roccomuso/memorystore
 //
 
-const debug = require('debug')('memorystore')
-const { LRUCache } = require('lru-cache')
-const { Store } = require('express-session')
+import debug from 'debug'
+import { LRUCache } from 'lru-cache'
+import { Store } from 'express-session'
 
 /**
  * An alternative memory store implementation for express session that prunes stale entries.
@@ -19,7 +19,7 @@ const { Store } = require('express-session')
  * @param {number} ttl entry time to live in ms
  * @param {number} max LRU cache max entries
  */
-module.exports = class MemoryStore extends Store {
+export default class MemoryStore extends Store {
   constructor(checkPeriod, ttl, max) {
     if (typeof checkPeriod !== 'number' || typeof ttl !== 'number' || typeof max !== 'number') {
       throw Error('All arguments must be provided')

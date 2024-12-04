@@ -1,18 +1,18 @@
-const fs = require('../libs/fsExtra')
-const Path = require('path')
-const Logger = require('../Logger')
-const readChunk = require('../libs/readChunk')
-const imageType = require('../libs/imageType')
+import fs from 'fs-extra'
+import Path from 'node:path'
+import Logger from '../Logger.js'
+import { readChunk } from 'read-chunk'
+import imageType from 'image-type'
 
-const globals = require('../utils/globals')
-const { downloadImageFile, filePathToPOSIX, checkPathIsFile } = require('../utils/fileUtils')
-const { extractCoverArt } = require('../utils/ffmpegHelpers')
-const parseEbookMetadata = require('../utils/parsers/parseEbookMetadata')
+import globals from '../utils/globals.js'
+import { downloadImageFile, filePathToPOSIX, checkPathIsFile } from '../utils/fileUtils.js'
+import { extractCoverArt } from '../utils/ffmpegHelpers.js'
+import * as parseEbookMetadata from '../utils/parsers/parseEbookMetadata.js'
 
-const CacheManager = require('../managers/CacheManager')
+import CacheManager from '../managers/CacheManager.js'
 
 class CoverManager {
-  constructor() { }
+  constructor() {}
 
   getCoverDirectory(libraryItem) {
     if (global.ServerSettings.storeCoverWithItem && !libraryItem.isFile) {
@@ -361,4 +361,4 @@ class CoverManager {
     }
   }
 }
-module.exports = new CoverManager()
+export default new CoverManager()

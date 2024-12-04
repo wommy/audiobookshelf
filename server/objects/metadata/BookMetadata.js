@@ -1,7 +1,8 @@
-const Logger = require('../../Logger')
-const { areEquivalent, copyValue, getTitleIgnorePrefix, getTitlePrefixAtEnd } = require('../../utils/index')
-const parseNameString = require('../../utils/parsers/parseNameString')
-class BookMetadata {
+import Logger from '../../Logger.js'
+import { areEquivalent, copyValue, getTitleIgnorePrefix, getTitlePrefixAtEnd } from '../../utils/index.js'
+import * as parseNameString from '../../utils/parsers/parseNameString.js'
+
+export default class BookMetadata {
   constructor(metadata) {
     this.title = null
     this.subtitle = null
@@ -181,4 +182,3 @@ class BookMetadata {
     return hasUpdates
   }
 }
-module.exports = BookMetadata

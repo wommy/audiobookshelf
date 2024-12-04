@@ -1,9 +1,9 @@
-const Path = require('path')
-const { getFileTimestampsWithIno, filePathToPOSIX } = require('../../utils/fileUtils')
-const globals = require('../../utils/globals')
-const FileMetadata = require('../metadata/FileMetadata')
+import Path from 'node:path'
+import { getFileTimestampsWithIno, filePathToPOSIX } from '../../utils/fileUtils.js'
+import globals from '../../utils/globals.js'
+import FileMetadata from '../metadata/FileMetadata.js'
 
-class LibraryFile {
+export default class LibraryFile {
   constructor(file) {
     this.ino = null
     this.metadata = null
@@ -74,4 +74,3 @@ class LibraryFile {
     this.updatedAt = Date.now()
   }
 }
-module.exports = LibraryFile

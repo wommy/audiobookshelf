@@ -1,4 +1,4 @@
-const { DataTypes, Model } = require('sequelize')
+import { DataTypes, Model } from 'sequelize'
 
 /**
  * @typedef ClientCustomMetadataProvider
@@ -8,7 +8,7 @@ const { DataTypes, Model } = require('sequelize')
  * @property {string} slug
  */
 
-class CustomMetadataProvider extends Model {
+export default class CustomMetadataProvider extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -102,5 +102,3 @@ class CustomMetadataProvider extends Model {
     }
   }
 }
-
-module.exports = CustomMetadataProvider

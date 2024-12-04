@@ -1,11 +1,11 @@
-const Path = require('path')
-const EventEmitter = require('events')
-const Watcher = require('./libs/watcher/watcher')
-const Logger = require('./Logger')
-const Task = require('./objects/Task')
-const TaskManager = require('./managers/TaskManager')
+import Path from 'node:path'
+import EventEmitter from 'node:events'
+import Watcher from 'watcher'
+import Logger from './Logger.js'
+import Task from './objects/Task.js'
+import TaskManager from './managers/TaskManager.js'
 
-const { filePathToPOSIX, isSameOrSubPath, getFileMTimeMs } = require('./utils/fileUtils')
+import { filePathToPOSIX, isSameOrSubPath, getFileMTimeMs } from './utils/fileUtils.js'
 
 /**
  * @typedef PendingFileUpdate
@@ -427,4 +427,4 @@ class FolderWatcher extends EventEmitter {
     }, 5000)
   }
 }
-module.exports = new FolderWatcher()
+export default new FolderWatcher()

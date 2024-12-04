@@ -1,19 +1,19 @@
-const sequelize = require('sequelize')
-const Path = require('path')
-const packageJson = require('../../package.json')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
-const fs = require('../libs/fsExtra')
-const fileUtils = require('../utils/fileUtils')
-const scanUtils = require('../utils/scandir')
-const { LogLevel, ScanResult } = require('../utils/constants')
-const libraryFilters = require('../utils/queries/libraryFilters')
-const TaskManager = require('../managers/TaskManager')
-const LibraryItemScanner = require('./LibraryItemScanner')
-const LibraryScan = require('./LibraryScan')
-const LibraryItemScanData = require('./LibraryItemScanData')
-const Task = require('../objects/Task')
+import sequelize from 'sequelize'
+import Path from 'node:path'
+import packageJson from '../../package.json' with { type: 'json' }
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
+import fs from 'fs-extra'
+import * as fileUtils from '../utils/fileUtils.js'
+import * as scanUtils from '../utils/scandir.js'
+import { LogLevel, ScanResult } from '../utils/constants.js'
+import libraryFilters from '../utils/queries/libraryFilters.js'
+import TaskManager from '../managers/TaskManager.js'
+import LibraryItemScanner from './LibraryItemScanner.js'
+import LibraryScan from './LibraryScan.js'
+import LibraryItemScanData from './LibraryItemScanData.js'
+import Task from '../objects/Task.js'
 
 class LibraryScanner {
   constructor() {
@@ -654,7 +654,6 @@ class LibraryScanner {
     return itemGroupingResults
   }
 }
-module.exports = new LibraryScanner()
 
 function ItemToFileInoMatch(libraryItem1, libraryItem2) {
   return libraryItem1.isFile && libraryItem2.libraryFiles.some((lf) => lf.ino === libraryItem1.ino)
@@ -723,3 +722,5 @@ async function findLibraryItemByFileToItemInoMatch(libraryId, fullPath, isSingle
   if (existingLibraryItem) Logger.debug(`[LibraryScanner] Found library item with inode matching one of "${itemFileInos.join(',')}" at path "${existingLibraryItem.path}"`)
   return existingLibraryItem
 }
+
+export default new LibraryScanner()

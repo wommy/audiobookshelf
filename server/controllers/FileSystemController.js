@@ -1,9 +1,10 @@
-const { Request, Response } = require('express')
-const Path = require('path')
-const Logger = require('../Logger')
-const fs = require('../libs/fsExtra')
-const { toNumber } = require('../utils/index')
-const fileUtils = require('../utils/fileUtils')
+import express from 'express'
+const { Request, Response } = express
+import Path from 'node:path'
+import Logger from '../Logger.js'
+import fs from 'fs-extra'
+import { toNumber } from '../utils/index.js'
+import * as fileUtils from '../utils/fileUtils.js'
 
 /**
  * @typedef RequestUserObject
@@ -98,4 +99,4 @@ class FileSystemController {
     })
   }
 }
-module.exports = new FileSystemController()
+export default new FileSystemController()

@@ -1,9 +1,9 @@
-const { DataTypes, Model, Op, literal } = require('sequelize')
-const Logger = require('../Logger')
+import { DataTypes, Model, Op, literal } from 'sequelize'
+import Logger from '../Logger.js'
 
-const oldPlaylist = require('../objects/Playlist')
+import oldPlaylist from '../objects/Playlist.js'
 
-class Playlist extends Model {
+export default class Playlist extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -353,5 +353,3 @@ class Playlist extends Model {
     })
   }
 }
-
-module.exports = Playlist

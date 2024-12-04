@@ -1,9 +1,9 @@
-const Sequelize = require('sequelize')
-const Database = require('../../Database')
-const libraryItemsBookFilters = require('./libraryItemsBookFilters')
-const libraryItemsPodcastFilters = require('./libraryItemsPodcastFilters')
+import Sequelize from 'sequelize'
+import Database from '../../Database.js'
+import libraryItemsBookFilters from './libraryItemsBookFilters.js'
+import libraryItemsPodcastFilters from './libraryItemsPodcastFilters.js'
 
-module.exports = {
+export default {
   /**
    * Get all library items that have tags
    * @param {string[]} tags

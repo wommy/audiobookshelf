@@ -1,8 +1,8 @@
-const { DataTypes, Model } = require('sequelize')
-const oldFeed = require('../objects/Feed')
-const areEquivalent = require('../utils/areEquivalent')
+import { DataTypes, Model } from 'sequelize'
+import oldFeed from '../objects/Feed.js'
+import areEquivalent from '../utils/areEquivalent.js'
 
-class Feed extends Model {
+export default class Feed extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -370,5 +370,3 @@ class Feed extends Model {
     })
   }
 }
-
-module.exports = Feed

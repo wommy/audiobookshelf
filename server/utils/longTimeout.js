@@ -1,7 +1,7 @@
 /**
  * Handle timeouts greater than 32-bit signed integer
  */
-class LongTimeout {
+export default class LongTimeout {
   constructor() {
     this.timeout = 0
     this.timer = null
@@ -33,4 +33,3 @@ class LongTimeout {
     handleTimeout()
   }
 }
-module.exports = LongTimeout

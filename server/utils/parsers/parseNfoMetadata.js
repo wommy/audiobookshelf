@@ -96,7 +96,7 @@ function parseNfoMetadata(nfoText) {
 
   return metadata
 }
-module.exports = { parseNfoMetadata }
+export { parseNfoMetadata }
 
 function extractYear(str) {
   const match = str.match(/\d{4}/g)

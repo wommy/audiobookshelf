@@ -1,4 +1,4 @@
-class FeedMeta {
+export default class FeedMeta {
   constructor(meta) {
     this.title = null
     this.description = null
@@ -103,4 +103,3 @@ class FeedMeta {
     }
   }
 }
-module.exports = FeedMeta

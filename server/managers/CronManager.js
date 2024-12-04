@@ -1,12 +1,12 @@
-const Sequelize = require('sequelize')
-const cron = require('../libs/nodeCron')
-const Logger = require('../Logger')
-const Database = require('../Database')
-const LibraryScanner = require('../scanner/LibraryScanner')
+import Sequelize from 'sequelize'
+import * as cron from 'node-cron'
+import Logger from '../Logger.js'
+import Database from '../Database.js'
+import LibraryScanner from '../scanner/LibraryScanner.js'
 
-const ShareManager = require('./ShareManager')
+import ShareManager from './ShareManager.js'
 
-class CronManager {
+export default class CronManager {
   constructor(podcastManager, playbackSessionManager) {
     /** @type {import('./PodcastManager')} */
     this.podcastManager = podcastManager
@@ -237,4 +237,3 @@ class CronManager {
     }
   }
 }
-module.exports = CronManager

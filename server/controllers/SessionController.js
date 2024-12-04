@@ -1,9 +1,10 @@
-const { Request, Response, NextFunction } = require('express')
-const Logger = require('../Logger')
-const Database = require('../Database')
-const { toNumber, isUUID } = require('../utils/index')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import Logger from '../Logger.js'
+import Database from '../Database.js'
+import { toNumber, isUUID } from '../utils/index.js'
 
-const ShareManager = require('../managers/ShareManager')
+import ShareManager from '../managers/ShareManager.js'
 
 /**
  * @typedef RequestUserObject
@@ -310,4 +311,4 @@ class SessionController {
     next()
   }
 }
-module.exports = new SessionController()
+export default new SessionController()

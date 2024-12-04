@@ -1,10 +1,11 @@
-const { Request, Response } = require('express')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
-const { sort } = require('../libs/fastSort')
-const { toNumber, isNullOrNaN } = require('../utils/index')
-const userStats = require('../utils/queries/userStats')
+import express from 'express'
+const { Request, Response } = express
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
+import { sort } from 'fast-sort'
+import { toNumber, isNullOrNaN } from '../utils/index.js'
+import userStats from '../utils/queries/userStats.js'
 
 /**
  * @typedef RequestUserObject
@@ -462,4 +463,4 @@ class MeController {
     res.json(data)
   }
 }
-module.exports = new MeController()
+export default new MeController()

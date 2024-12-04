@@ -1,8 +1,8 @@
-const Path = require('path')
-const Logger = require('../../Logger')
-const fsExtra = require('../../libs/fsExtra')
-const fileUtils = require('../fileUtils')
-const LibraryFile = require('../../objects/files/LibraryFile')
+import Path from 'node:path'
+import Logger from '../../Logger.js'
+import fsExtra from 'fs-extra'
+import fileUtils from '../fileUtils.js'
+import LibraryFile from '../../objects/files/LibraryFile.js'
 
 /**
  * 
@@ -86,7 +86,7 @@ async function runMigration(Database, offset = 0, totalCreated = 0) {
  * 
  * @param {import('../../Database')} Database 
  */
-module.exports.migrate = async (Database) => {
+export const migrate = async (Database) => {
   Logger.info(`[absMetadataMigration] Starting metadata.json migration`)
   const totalCreated = await runMigration(Database)
   Logger.info(`[absMetadataMigration] Finished metadata.json migration (${totalCreated} files created)`)

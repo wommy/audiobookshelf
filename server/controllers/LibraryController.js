@@ -1,26 +1,27 @@
-const { Request, Response, NextFunction } = require('express')
-const Sequelize = require('sequelize')
-const Path = require('path')
-const fs = require('../libs/fsExtra')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const libraryHelpers = require('../utils/libraryHelpers')
-const libraryItemsBookFilters = require('../utils/queries/libraryItemsBookFilters')
-const libraryItemFilters = require('../utils/queries/libraryItemFilters')
-const seriesFilters = require('../utils/queries/seriesFilters')
-const fileUtils = require('../utils/fileUtils')
-const { createNewSortInstance } = require('../libs/fastSort')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import Sequelize from 'sequelize'
+import Path from 'node:path'
+import fs from 'fs-extra'
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import libraryHelpers from '../utils/libraryHelpers.js'
+import libraryItemsBookFilters from '../utils/queries/libraryItemsBookFilters.js'
+import libraryItemFilters from '../utils/queries/libraryItemFilters.js'
+import seriesFilters from '../utils/queries/seriesFilters.js'
+import * as fileUtils from '../utils/fileUtils.js'
+import { createNewSortInstance } from 'fast-sort'
 const naturalSort = createNewSortInstance({
   comparer: new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare
 })
 
-const LibraryScanner = require('../scanner/LibraryScanner')
-const Scanner = require('../scanner/Scanner')
-const Database = require('../Database')
-const Watcher = require('../Watcher')
-const libraryFilters = require('../utils/queries/libraryFilters')
-const libraryItemsPodcastFilters = require('../utils/queries/libraryItemsPodcastFilters')
-const authorFilters = require('../utils/queries/authorFilters')
+import LibraryScanner from '../scanner/LibraryScanner.js'
+import Scanner from '../scanner/Scanner.js'
+import Database from '../Database.js'
+import Watcher from '../Watcher.js'
+import libraryFilters from '../utils/queries/libraryFilters.js'
+import libraryItemsPodcastFilters from '../utils/queries/libraryItemsPodcastFilters.js'
+import authorFilters from '../utils/queries/authorFilters.js'
 
 /**
  * @typedef RequestUserObject
@@ -1351,4 +1352,4 @@ class LibraryController {
     next()
   }
 }
-module.exports = new LibraryController()
+export default new LibraryController()

@@ -1,8 +1,8 @@
-const axios = require('axios')
-const ssrfFilter = require('ssrf-req-filter')
-const Logger = require('../Logger')
-const { xmlToJSON, levenshteinDistance } = require('./index')
-const htmlSanitizer = require('../utils/htmlSanitizer')
+import axios from 'axios'
+import ssrfFilter from 'ssrf-req-filter'
+import Logger from '../Logger.js'
+import { xmlToJSON, levenshteinDistance } from './index.js'
+import * as htmlSanitizer from '../utils/htmlSanitizer.js'
 
 function extractFirstArrayItem(json, key) {
   if (!json[key]?.length) return null
@@ -194,7 +194,7 @@ function cleanPodcastJson(rssJson, excludeEpisodeMetadata) {
   return podcast
 }
 
-module.exports.parsePodcastRssFeedXml = async (xml, excludeEpisodeMetadata = false, includeRaw = false) => {
+export const parsePodcastRssFeedXml = async (xml, excludeEpisodeMetadata = false, includeRaw = false) => {
   if (!xml) return null
   const json = await xmlToJSON(xml)
   if (!json?.rss) {
@@ -225,7 +225,7 @@ module.exports.parsePodcastRssFeedXml = async (xml, excludeEpisodeMetadata = fal
  * @param {boolean} [excludeEpisodeMetadata=false]
  * @returns {Promise}
  */
-module.exports.getPodcastFeed = (feedUrl, excludeEpisodeMetadata = false) => {
+export const getPodcastFeed = (feedUrl, excludeEpisodeMetadata = false) => {
   Logger.debug(`[podcastUtils] getPodcastFeed for "${feedUrl}"`)
 
   let userAgent = 'audiobookshelf (+https://audiobookshelf.org; like iTMS)'
@@ -279,7 +279,7 @@ module.exports.getPodcastFeed = (feedUrl, excludeEpisodeMetadata = false) => {
 }
 
 // Return array of episodes ordered by closest match (Levenshtein distance of 6 or less)
-module.exports.findMatchingEpisodes = async (feedUrl, searchTitle) => {
+export const findMatchingEpisodes = async (feedUrl, searchTitle) => {
   const feed = await this.getPodcastFeed(feedUrl).catch(() => {
     return null
   })
@@ -287,7 +287,7 @@ module.exports.findMatchingEpisodes = async (feedUrl, searchTitle) => {
   return this.findMatchingEpisodesInFeed(feed, searchTitle)
 }
 
-module.exports.findMatchingEpisodesInFeed = (feed, searchTitle) => {
+export const findMatchingEpisodesInFeed = (feed, searchTitle) => {
   searchTitle = searchTitle.toLowerCase().trim()
   if (!feed?.episodes) {
     return null

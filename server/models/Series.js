@@ -1,8 +1,8 @@
-const { DataTypes, Model, where, fn, col } = require('sequelize')
+import { DataTypes, Model, where, fn, col } from 'sequelize'
 
-const { getTitlePrefixAtEnd } = require('../utils/index')
+import { getTitlePrefixAtEnd } from '../utils/index.js'
 
-class Series extends Model {
+export default class Series extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -123,5 +123,3 @@ class Series extends Model {
     }
   }
 }
-
-module.exports = Series

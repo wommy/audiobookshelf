@@ -1,10 +1,10 @@
-const Path = require('path')
-const uuid = require('uuid')
-const Logger = require('../Logger')
-const { parseString } = require('xml2js')
-const areEquivalent = require('./areEquivalent')
+import Path from 'node:path'
+import * as uuid from 'uuid'
+import Logger from '../Logger.js'
+import { parseString } from 'xml2js'
+import areEquivalent from './areEquivalent.js'
 
-const levenshteinDistance = (str1, str2, caseSensitive = false) => {
+export const levenshteinDistance = (str1, str2, caseSensitive = false) => {
   str1 = String(str1)
   str2 = String(str2)
   if (!caseSensitive) {
@@ -32,21 +32,20 @@ const levenshteinDistance = (str1, str2, caseSensitive = false) => {
   }
   return track[str2.length][str1.length]
 }
-module.exports.levenshteinDistance = levenshteinDistance
 
-module.exports.isObject = (val) => {
+export const isObject = (val) => {
   return val !== null && typeof val === 'object'
 }
 
-module.exports.comparePaths = (path1, path2) => {
+export const comparePaths = (path1, path2) => {
   return path1 === path2 || Path.normalize(path1) === Path.normalize(path2)
 }
 
-module.exports.isNullOrNaN = (num) => {
+export const isNullOrNaN = (num) => {
   return num === null || isNaN(num)
 }
 
-const xmlToJSON = (xml) => {
+export const xmlToJSON = (xml) => {
   return new Promise((resolve, reject) => {
     parseString(xml, (err, results) => {
       if (err) {
@@ -58,9 +57,8 @@ const xmlToJSON = (xml) => {
     })
   })
 }
-module.exports.xmlToJSON = xmlToJSON
 
-module.exports.getId = (prepend = '') => {
+export const getId = (prepend = '') => {
   var _id = Math.random().toString(36).substring(2, 8) + Math.random().toString(36).substring(2, 8) + Math.random().toString(36).substring(2, 8)
   if (prepend) return prepend + '_' + _id
   return _id
@@ -71,7 +69,7 @@ module.exports.getId = (prepend = '') => {
  * @param {number} seconds
  * @returns {string}
  */
-function elapsedPretty(seconds) {
+export const elapsedPretty = (seconds) => {
   if (seconds > 0 && seconds < 1) {
     return `${Math.floor(seconds * 1000)} ms`
   }
@@ -100,9 +98,8 @@ function elapsedPretty(seconds) {
   }
   return timeParts.join(' ')
 }
-module.exports.elapsedPretty = elapsedPretty
 
-function secondsToTimestamp(seconds, includeMs = false, alwaysIncludeHours = false) {
+export const secondsToTimestamp = (seconds, includeMs = false, alwaysIncludeHours = false) => {
   var _seconds = seconds
   var _minutes = Math.floor(seconds / 60)
   _seconds -= _minutes * 60
@@ -121,16 +118,15 @@ function secondsToTimestamp(seconds, includeMs = false, alwaysIncludeHours = fal
   }
   return `${_hours}:${_minutes.toString().padStart(2, '0')}:${_seconds.toString().padStart(2, '0')}${msString}`
 }
-module.exports.secondsToTimestamp = secondsToTimestamp
 
-module.exports.reqSupportsWebp = (req) => {
+export const reqSupportsWebp = (req) => {
   if (!req || !req.headers || !req.headers.accept) return false
   return req.headers.accept.includes('image/webp') || req.headers.accept === '*/*'
 }
 
-module.exports.areEquivalent = areEquivalent
+export { areEquivalent }
 
-module.exports.copyValue = (val) => {
+export const copyValue = (val) => {
   if (val === undefined || val === '') return null
   else if (!val) return val
 
@@ -147,12 +143,12 @@ module.exports.copyValue = (val) => {
   }
 }
 
-module.exports.toNumber = (val, fallback = 0) => {
+export const toNumber = (val, fallback = 0) => {
   if (isNaN(val) || val === null) return fallback
   return Number(val)
 }
 
-module.exports.cleanStringForSearch = (str) => {
+export const cleanStringForSearch = (str) => {
   if (!str) return ''
   // Remove ' . ` " ,
   return str
@@ -161,7 +157,7 @@ module.exports.cleanStringForSearch = (str) => {
     .trim()
 }
 
-const getTitleParts = (title) => {
+export const getTitleParts = (title) => {
   if (!title) return ['', null]
   const prefixesToIgnore = global.ServerSettings.sortingPrefixes || []
   for (const prefix of prefixesToIgnore) {
@@ -179,7 +175,7 @@ const getTitleParts = (title) => {
  * @param {string} title
  * @returns {string}
  */
-module.exports.getTitleIgnorePrefix = (title) => {
+export const getTitleIgnorePrefix = (title) => {
   return getTitleParts(title)[0]
 }
 
@@ -189,7 +185,7 @@ module.exports.getTitleIgnorePrefix = (title) => {
  * @param {string} title
  * @returns {string}
  */
-module.exports.getTitlePrefixAtEnd = (title) => {
+export const getTitlePrefixAtEnd = (title) => {
   let [sort, prefix] = getTitleParts(title)
   return prefix ? `${sort}, ${prefix}` : title
 }
@@ -201,7 +197,7 @@ module.exports.getTitlePrefixAtEnd = (title) => {
  * @param {string} str
  * @returns {string}
  */
-module.exports.escapeRegExp = (str) => {
+export const escapeRegExp = (str) => {
   if (typeof str !== 'string') return ''
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
@@ -212,7 +208,7 @@ module.exports.escapeRegExp = (str) => {
  * @param {string} rawUrl
  * @returns {string} null if invalid
  */
-module.exports.validateUrl = (rawUrl) => {
+export const validateUrl = (rawUrl) => {
   if (!rawUrl || typeof rawUrl !== 'string') return null
   try {
     return new URL(rawUrl).toString()
@@ -228,7 +224,7 @@ module.exports.validateUrl = (rawUrl) => {
  * @param {string} str
  * @returns {boolean}
  */
-module.exports.isUUID = (str) => {
+export const isUUID = (str) => {
   if (!str || typeof str !== 'string') return false
   return uuid.validate(str)
 }
@@ -239,7 +235,7 @@ module.exports.isUUID = (str) => {
  * @param {string} str
  * @returns {boolean}
  */
-module.exports.isValidASIN = (str) => {
+export const isValidASIN = (str) => {
   if (!str || typeof str !== 'string') return false
   return /^[A-Z0-9]{10}$/.test(str)
 }

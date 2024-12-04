@@ -1,6 +1,7 @@
-const { version } = require('../../package.json')
+import pkg from '../../package.json' with { type: 'json' }
+const { version } = pkg
 
-module.exports.notificationData = {
+export const notificationData = {
   events: [
     {
       name: 'onPodcastEpisodeDownloaded',

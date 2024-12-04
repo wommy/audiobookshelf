@@ -1,19 +1,20 @@
-const Sequelize = require('sequelize')
-const Path = require('path')
-const { Request, Response } = require('express')
-const fs = require('../libs/fsExtra')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
-const Watcher = require('../Watcher')
+import Sequelize from 'sequelize'
+import Path from 'node:path'
+import express from 'express'
+const { Request, Response } = express
+import fs from 'fs-extra'
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
+import Watcher from '../Watcher.js'
 
-const libraryItemFilters = require('../utils/queries/libraryItemFilters')
-const patternValidation = require('../libs/nodeCron/pattern-validation')
-const { isObject, getTitleIgnorePrefix } = require('../utils/index')
-const { sanitizeFilename } = require('../utils/fileUtils')
+import libraryItemFilters from '../utils/queries/libraryItemFilters.js'
+import * as patternValidation from 'node-cron/src/pattern-validation.js'
+import { isObject, getTitleIgnorePrefix } from '../utils/index.js'
+import { sanitizeFilename } from '../utils/fileUtils.js'
 
-const TaskManager = require('../managers/TaskManager')
-const adminStats = require('../utils/queries/adminStats')
+import TaskManager from '../managers/TaskManager.js'
+import adminStats from '../utils/queries/adminStats.js'
 
 /**
  * @typedef RequestUserObject
@@ -752,4 +753,4 @@ class MiscController {
     })
   }
 }
-module.exports = new MiscController()
+export default new MiscController()

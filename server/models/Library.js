@@ -1,5 +1,5 @@
-const { DataTypes, Model } = require('sequelize')
-const Logger = require('../Logger')
+import { DataTypes, Model } from 'sequelize'
+import Logger from '../Logger.js'
 
 /**
  * @typedef LibrarySettingsObject
@@ -16,7 +16,7 @@ const Logger = require('../Logger')
  * @property {number} markAsFinishedPercentComplete Percent complete to mark as finished (0-100). If this is set it will be used over markAsFinishedTimeRemaining.
  */
 
-class Library extends Model {
+export default class Library extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -218,5 +218,3 @@ class Library extends Model {
     }
   }
 }
-
-module.exports = Library

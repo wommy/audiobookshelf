@@ -1,11 +1,11 @@
-const Path = require('path')
-const SocketAuthority = require('../SocketAuthority')
-const Logger = require('../Logger')
-const fs = require('../libs/fsExtra')
-const ffmpegHelpers = require('../utils/ffmpegHelpers')
-const TaskManager = require('./TaskManager')
-const Task = require('../objects/Task')
-const fileUtils = require('../utils/fileUtils')
+import Path from 'node:path'
+import SocketAuthority from '../SocketAuthority.js'
+import Logger from '../Logger.js'
+import fs from 'fs-extra'
+import * as ffmpegHelpers from '../utils/ffmpegHelpers.js'
+import TaskManager from './TaskManager.js'
+import Task from '../objects/Task.js'
+import * as fileUtils from '../utils/fileUtils.js'
 
 /**
  * @typedef UpdateMetadataOptions
@@ -13,7 +13,7 @@ const fileUtils = require('../utils/fileUtils')
  * @property {boolean} [backup=false] - Whether to backup the files.
  */
 
-class AudioMetadataMangaer {
+export default class AudioMetadataMangaer {
   constructor() {
     this.itemsCacheDir = Path.join(global.MetadataPath, 'cache/items')
 
@@ -281,4 +281,3 @@ class AudioMetadataMangaer {
     }
   }
 }
-module.exports = AudioMetadataMangaer

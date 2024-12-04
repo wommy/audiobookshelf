@@ -1,6 +1,6 @@
-const axios = require('axios')
-const Logger = require('../Logger')
-const htmlSanitizer = require('../utils/htmlSanitizer')
+import axios from 'axios'
+import Logger from '../Logger.js'
+import * as htmlSanitizer from '../utils/htmlSanitizer.js'
 
 /**
  * @typedef iTunesSearchParams
@@ -27,7 +27,7 @@ const htmlSanitizer = require('../utils/htmlSanitizer')
  * @property {boolean} explicit
  */
 
-class iTunes {
+export default class iTunes {
   #responseTimeout = 30000
 
   constructor() {}
@@ -167,4 +167,3 @@ class iTunes {
     })
   }
 }
-module.exports = iTunes

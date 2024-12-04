@@ -1,10 +1,10 @@
-const Path = require('path')
-const packageJson = require('../../../package.json')
-const { BookshelfView } = require('../../utils/constants')
-const Logger = require('../../Logger')
-const User = require('../../models/User')
+import Path from 'node:path'
+import packageJson from '../../../package.json' with { type: 'json' }
+import { BookshelfView } from '../../utils/constants.js'
+import Logger from '../../Logger.js'
+import User from '../../models/User.js'
 
-class ServerSettings {
+export default class ServerSettings {
   constructor(settings) {
     this.id = 'server-settings'
     this.tokenSecret = null
@@ -336,4 +336,3 @@ class ServerSettings {
     return hasUpdates
   }
 }
-module.exports = ServerSettings

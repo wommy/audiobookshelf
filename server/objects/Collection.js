@@ -1,6 +1,6 @@
-const uuidv4 = require("uuid").v4
+import { v4 as uuidv4 } from 'uuid'
 
-class Collection {
+export default class Collection {
   constructor(collection) {
     this.id = null
     this.libraryId = null
@@ -112,4 +112,3 @@ class Collection {
     return hasUpdates
   }
 }
-module.exports = Collection

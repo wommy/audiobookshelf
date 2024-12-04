@@ -1,6 +1,6 @@
-const axios = require('axios').default
+import axios from 'axios'
 
-class OpenLibrary {
+export default class OpenLibrary {
   #responseTimeout = 30000
 
   constructor() {
@@ -118,4 +118,3 @@ class OpenLibrary {
     return searchDocs
   }
 }
-module.exports = OpenLibrary

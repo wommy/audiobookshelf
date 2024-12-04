@@ -1,7 +1,8 @@
-const { Request, Response, NextFunction } = require('express')
-const Logger = require('../Logger')
-const Database = require('../Database')
-const libraryItemsBookFilters = require('../utils/queries/libraryItemsBookFilters')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import Logger from '../Logger.js'
+import Database from '../Database.js'
+import libraryItemsBookFilters from '../utils/queries/libraryItemsBookFilters.js'
 
 /**
  * @typedef RequestUserObject
@@ -185,4 +186,4 @@ class RSSFeedController {
     next()
   }
 }
-module.exports = new RSSFeedController()
+export default new RSSFeedController()

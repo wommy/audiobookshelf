@@ -1,8 +1,8 @@
-const { DataTypes, Model } = require('sequelize')
-const Logger = require('../Logger')
-const { isNullOrNaN } = require('../utils')
+import { DataTypes, Model } from 'sequelize'
+import Logger from '../Logger.js'
+import { isNullOrNaN } from '../utils/index.js'
 
-class MediaProgress extends Model {
+export default class MediaProgress extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -265,5 +265,3 @@ class MediaProgress extends Model {
     return this.save()
   }
 }
-
-module.exports = MediaProgress

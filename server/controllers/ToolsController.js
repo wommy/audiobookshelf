@@ -1,6 +1,7 @@
-const { Request, Response, NextFunction } = require('express')
-const Logger = require('../Logger')
-const Database = require('../Database')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import Logger from '../Logger.js'
+import Database from '../Database.js'
 
 /**
  * @typedef RequestUserObject
@@ -171,4 +172,4 @@ class ToolsController {
     next()
   }
 }
-module.exports = new ToolsController()
+export default new ToolsController()

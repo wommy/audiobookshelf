@@ -1,15 +1,35 @@
-
-
 // https://github.com/RateGravity/parse-full-name/blob/master/index.js
-module.exports = (nameToParse, partToReturn, fixCase, stopOnError, useLongLists) => {
-
-  var i, j, k, l, m, n, part, comma, titleList, suffixList, prefixList, regex,
-    partToCheck, partFound, partsFoundCount, firstComma, remainingCommas,
-    nameParts = [], nameCommas = [null], partsFound = [],
+export default (nameToParse, partToReturn, fixCase, stopOnError, useLongLists) => {
+  var i,
+    j,
+    k,
+    l,
+    m,
+    n,
+    part,
+    comma,
+    titleList,
+    suffixList,
+    prefixList,
+    regex,
+    partToCheck,
+    partFound,
+    partsFoundCount,
+    firstComma,
+    remainingCommas,
+    nameParts = [],
+    nameCommas = [null],
+    partsFound = [],
     conjunctionList = ['&', 'and', 'et', 'e', 'of', 'the', 'und', 'y'],
     parsedName = {
-      title: '', first: '', middle: '', last: '', nick: '', suffix: '', error: []
-    };
+      title: '',
+      first: '',
+      middle: '',
+      last: '',
+      nick: '',
+      suffix: '',
+      error: []
+    }
 
   // Validate inputs, or set to defaults
   partToReturn = partToReturn && ['title', 'first', 'middle', 'last', 'nick',

@@ -1,29 +1,29 @@
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
-const Watcher = require('../Watcher')
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
+import Watcher from '../Watcher.js'
 
-const fs = require('../libs/fsExtra')
+import fs from 'fs-extra'
 
-const { getPodcastFeed } = require('../utils/podcastUtils')
-const { removeFile, downloadFile, sanitizeFilename, filePathToPOSIX, getFileTimestampsWithIno } = require('../utils/fileUtils')
-const { levenshteinDistance } = require('../utils/index')
-const opmlParser = require('../utils/parsers/parseOPML')
-const opmlGenerator = require('../utils/generators/opmlGenerator')
-const prober = require('../utils/prober')
-const ffmpegHelpers = require('../utils/ffmpegHelpers')
+import { getPodcastFeed } from '../utils/podcastUtils.js'
+import { removeFile, downloadFile, sanitizeFilename, filePathToPOSIX, getFileTimestampsWithIno } from '../utils/fileUtils.js'
+import { levenshteinDistance } from '../utils/index.js'
+import * as opmlParser from '../utils/parsers/parseOPML.js'
+import * as opmlGenerator from '../utils/generators/opmlGenerator.js'
+import * as prober from '../utils/prober.js'
+import * as ffmpegHelpers from '../utils/ffmpegHelpers.js'
 
-const TaskManager = require('./TaskManager')
-const CoverManager = require('../managers/CoverManager')
-const NotificationManager = require('../managers/NotificationManager')
+import TaskManager from './TaskManager.js'
+import CoverManager from '../managers/CoverManager.js'
+import NotificationManager from '../managers/NotificationManager.js'
 
-const LibraryFile = require('../objects/files/LibraryFile')
-const PodcastEpisodeDownload = require('../objects/PodcastEpisodeDownload')
-const PodcastEpisode = require('../objects/entities/PodcastEpisode')
-const AudioFile = require('../objects/files/AudioFile')
-const LibraryItem = require('../objects/LibraryItem')
+import LibraryFile from '../objects/files/LibraryFile.js'
+import PodcastEpisodeDownload from '../objects/PodcastEpisodeDownload.js'
+import PodcastEpisode from '../objects/entities/PodcastEpisode.js'
+import AudioFile from '../objects/files/AudioFile.js'
+import LibraryItem from '../objects/LibraryItem.js'
 
-class PodcastManager {
+export default class PodcastManager {
   constructor() {
     this.downloadQueue = []
     this.currentDownload = null
@@ -579,4 +579,3 @@ class PodcastManager {
     Logger.info(`[PodcastManager] createPodcastsFromFeedUrls: Finished OPML import. Created ${numPodcastsAdded} podcasts out of ${rssFeedUrls.length} RSS feed URLs`)
   }
 }
-module.exports = PodcastManager

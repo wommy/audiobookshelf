@@ -1,7 +1,8 @@
-const { Request, Response, NextFunction } = require('express')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
 
 /**
  * @typedef RequestUserObject
@@ -138,4 +139,4 @@ class EmailController {
     next()
   }
 }
-module.exports = new EmailController()
+export default new EmailController()

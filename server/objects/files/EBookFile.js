@@ -1,6 +1,6 @@
-const FileMetadata = require('../metadata/FileMetadata')
+import FileMetadata from '../metadata/FileMetadata.js'
 
-class EBookFile {
+export default class EBookFile {
   constructor(file) {
     this.ino = null
     this.metadata = null
@@ -58,4 +58,3 @@ class EBookFile {
     return hasUpdated
   }
 }
-module.exports = EBookFile

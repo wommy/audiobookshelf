@@ -1,4 +1,3 @@
-
 /**
  * TODO: Add more fields
  * @see https://anansi-project.github.io/docs/comicinfo/intro
@@ -6,7 +5,7 @@
  * @param {Object} comicInfoJson 
  * @returns {import('../../scanner/BookScanner').BookMetadataObject}
  */
-module.exports.parse = (comicInfoJson) => {
+export const parse = (comicInfoJson) => {
   if (!comicInfoJson?.ComicInfo) return null
 
   const ComicSeries = comicInfoJson.ComicInfo.Series?.[0]?.trim() || null

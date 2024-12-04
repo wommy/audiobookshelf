@@ -1,6 +1,6 @@
-const { DataTypes, Model } = require('sequelize')
+import { DataTypes, Model } from 'sequelize'
 
-class FeedEpisode extends Model {
+export default class FeedEpisode extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -137,5 +137,3 @@ class FeedEpisode extends Model {
     FeedEpisode.belongsTo(feed)
   }
 }
-
-module.exports = FeedEpisode

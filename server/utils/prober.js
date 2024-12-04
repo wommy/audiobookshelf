@@ -1,7 +1,6 @@
-const ffprobe = require('../libs/nodeFfprobe')
-const MediaProbeData = require('../scanner/MediaProbeData')
-
-const Logger = require('../Logger')
+import ffprobe from 'node-ffprobe'
+import MediaProbeData from '../scanner/MediaProbeData.js'
+import Logger from '../Logger.js'
 
 function tryGrabBitRate(stream, all_streams, total_bit_rate) {
   if (!isNaN(stream.bit_rate) && stream.bit_rate) {
@@ -289,7 +288,7 @@ function parseProbeData(data, verbose = false) {
  * @param {boolean} [verbose=false]
  * @returns {import('../scanner/MediaProbeData')|{error:string}}
  */
-function probe(filepath, verbose = false) {
+export function probe(filepath, verbose = false) {
   if (process.env.FFPROBE_PATH) {
     ffprobe.FFPROBE_PATH = process.env.FFPROBE_PATH
   }
@@ -319,7 +318,6 @@ function probe(filepath, verbose = false) {
       }
     })
 }
-module.exports.probe = probe
 
 /**
  * Ffprobe for audio file path
@@ -327,7 +325,7 @@ module.exports.probe = probe
  * @param {string} filepath
  * @returns {Object} ffprobe json output
  */
-function rawProbe(filepath) {
+export function rawProbe(filepath) {
   if (process.env.FFPROBE_PATH) {
     ffprobe.FFPROBE_PATH = process.env.FFPROBE_PATH
   }
@@ -338,4 +336,3 @@ function rawProbe(filepath) {
     }
   })
 }
-module.exports.rawProbe = rawProbe

@@ -1,6 +1,6 @@
-const { DataTypes, Model } = require('sequelize')
+import { DataTypes, Model } from 'sequelize'
 
-class PlaylistMediaItem extends Model {
+export default class PlaylistMediaItem extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -104,5 +104,3 @@ class PlaylistMediaItem extends Model {
     PlaylistMediaItem.belongsTo(playlist)
   }
 }
-
-module.exports = PlaylistMediaItem

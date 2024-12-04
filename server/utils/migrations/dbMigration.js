@@ -1,10 +1,10 @@
-const { DataTypes, QueryInterface } = require('sequelize')
-const Path = require('path')
-const uuidv4 = require('uuid').v4
-const Logger = require('../../Logger')
-const fs = require('../../libs/fsExtra')
-const oldDbFiles = require('./oldDbFiles')
-const parseNameString = require('../parsers/parseNameString')
+import { DataTypes, QueryInterface } from 'sequelize'
+import Path from 'node:path'
+import { v4 as uuidv4 } from 'uuid'
+import Logger from '../../Logger.js'
+import fs from 'fs-extra'
+import * as oldDbFiles from './oldDbFiles.js'
+import * as parseNameString from '../parsers/parseNameString.js'
 
 const oldDbIdMap = {
   users: {},
@@ -1101,7 +1101,7 @@ async function handleMigrateFeeds(DatabaseModels) {
   }
 }
 
-module.exports.migrate = async (DatabaseModels) => {
+export const migrate = async (DatabaseModels) => {
   Logger.info(`[dbMigration] Starting migration`)
 
   const start = Date.now()
@@ -1149,7 +1149,7 @@ module.exports.migrate = async (DatabaseModels) => {
 /**
  * @returns {boolean} true if old database exists
  */
-module.exports.checkShouldMigrate = async () => {
+export const checkShouldMigrate = async () => {
   if (await oldDbFiles.checkHasOldDb()) return true
   return oldDbFiles.checkHasOldDbZip()
 }
@@ -1358,7 +1358,7 @@ async function handleOldUsers(ctx) {
  * Migration from 2.3.0 to 2.3.1
  * @param {/src/Database} ctx
  */
-module.exports.migrationPatch = async (ctx) => {
+export const migrationPatch = async (ctx) => {
   const queryInterface = ctx.sequelize.getQueryInterface()
   const librariesTableDescription = await queryInterface.describeTable('libraries')
 
@@ -1662,7 +1662,7 @@ async function migrationPatch2BookSeries(ctx, offset = 0) {
  * Adding coverPath column to Feed model
  * @param {/src/Database} ctx
  */
-module.exports.migrationPatch2 = async (ctx) => {
+export const migrationPatch2 = async (ctx) => {
   const queryInterface = ctx.sequelize.getQueryInterface()
   const feedTableDescription = await queryInterface.describeTable('feeds')
   const authorsTableDescription = await queryInterface.describeTable('authors')

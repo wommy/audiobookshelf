@@ -1,10 +1,10 @@
-const Path = require('path')
-const fs = require('../libs/fsExtra')
+import Path from 'node:path'
+import fs from 'fs-extra'
 
-const Logger = require('../Logger')
-const DailyLog = require('../objects/DailyLog')
+import Logger from '../Logger.js'
+import DailyLog from '../objects/DailyLog.js'
 
-const { LogLevel } = require('../utils/constants')
+import { LogLevel } from '../utils/constants.js'
 
 const TAG = '[LogManager]'
 
@@ -17,7 +17,7 @@ const TAG = '[LogManager]'
  * @property {number} level
  */
 
-class LogManager {
+export default class LogManager {
   constructor() {
     this.DailyLogPath = Path.posix.join(global.MetadataPath, 'logs', 'daily')
     this.ScanLogPath = Path.posix.join(global.MetadataPath, 'logs', 'scans')
@@ -175,4 +175,3 @@ class LogManager {
     return this.currentDailyLog?.logs.slice(-5000) || ''
   }
 }
-module.exports = LogManager

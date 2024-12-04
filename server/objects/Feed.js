@@ -1,16 +1,16 @@
-const Path = require('path')
-const uuidv4 = require('uuid').v4
-const FeedMeta = require('./FeedMeta')
-const FeedEpisode = require('./FeedEpisode')
+import Path from 'node:path'
+import { v4 as uuidv4 } from 'uuid'
+import FeedMeta from './FeedMeta.js'
+import FeedEpisode from './FeedEpisode.js'
 
-const date = require('../libs/dateAndTime')
-const RSS = require('../libs/rss')
-const { createNewSortInstance } = require('../libs/fastSort')
+import date from 'date-and-time'
+import RSS from 'rss'
+import { createNewSortInstance } from 'fast-sort'
 const naturalSort = createNewSortInstance({
   comparer: new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare
 })
 
-class Feed {
+export default class Feed {
   constructor(feed) {
     this.id = null
     this.slug = null
@@ -424,4 +424,3 @@ class Feed {
     return author
   }
 }
-module.exports = Feed

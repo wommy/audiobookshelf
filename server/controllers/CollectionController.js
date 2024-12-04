@@ -1,10 +1,11 @@
-const { Request, Response, NextFunction } = require('express')
-const Sequelize = require('sequelize')
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import Sequelize from 'sequelize'
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
 
-const Collection = require('../objects/Collection')
+import Collection from '../objects/Collection.js'
 
 /**
  * @typedef RequestUserObject
@@ -383,4 +384,4 @@ class CollectionController {
     next()
   }
 }
-module.exports = new CollectionController()
+export default new CollectionController()

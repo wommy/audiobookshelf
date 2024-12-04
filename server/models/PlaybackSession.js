@@ -1,8 +1,8 @@
-const { DataTypes, Model } = require('sequelize')
+import { DataTypes, Model } from 'sequelize'
 
-const oldPlaybackSession = require('../objects/PlaybackSession')
+import oldPlaybackSession from '../objects/PlaybackSession.js'
 
-class PlaybackSession extends Model {
+export default class PlaybackSession extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -253,5 +253,3 @@ class PlaybackSession extends Model {
     })
   }
 }
-
-module.exports = PlaybackSession

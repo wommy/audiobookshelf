@@ -1,8 +1,8 @@
-const Path = require('path')
-const Logger = require('../../Logger')
-const StreamZip = require('../../libs/nodeStreamZip')
-const parseOpfMetadata = require('./parseOpfMetadata')
-const { xmlToJSON } = require('../index')
+import Path from 'path'
+import Logger from '../../Logger.js'
+import StreamZip from 'node-stream-zip'
+import * as parseOpfMetadata from './parseOpfMetadata.js'
+import { xmlToJSON } from '../index.js'
 
 /**
  * Extract file from epub and return string content
@@ -60,7 +60,6 @@ async function extractCoverImage(epubPath, epubImageFilepath, outputCoverPath) {
 
   return success
 }
-module.exports.extractCoverImage = extractCoverImage
 
 /**
  * Parse metadata from epub
@@ -130,4 +129,4 @@ async function parse(ebookFile) {
 
   return payload
 }
-module.exports.parse = parse
+export { extractCoverImage, parse }

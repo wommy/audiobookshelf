@@ -1,10 +1,10 @@
-const Logger = require('../../Logger')
-const PodcastEpisode = require('../entities/PodcastEpisode')
-const PodcastMetadata = require('../metadata/PodcastMetadata')
-const { areEquivalent, copyValue } = require('../../utils/index')
-const { filePathToPOSIX } = require('../../utils/fileUtils')
+import Logger from '../../Logger.js'
+import PodcastEpisode from '../entities/PodcastEpisode.js'
+import PodcastMetadata from '../metadata/PodcastMetadata.js'
+import { areEquivalent, copyValue } from '../../utils/index.js'
+import { filePathToPOSIX } from '../../utils/fileUtils.js'
 
-class Podcast {
+export default class Podcast {
   constructor(podcast) {
     this.id = null
     this.libraryItemId = null
@@ -270,4 +270,3 @@ class Podcast {
     return this.getEpisode(episodeId)?.chapters?.map((ch) => ({ ...ch })) || []
   }
 }
-module.exports = Podcast

@@ -1,16 +1,17 @@
-const { Request, Response, NextFunction } = require('express')
-const sequelize = require('sequelize')
-const fs = require('../libs/fsExtra')
-const { createNewSortInstance } = require('../libs/fastSort')
+import express from 'express'
+const { Request, Response, NextFunction } = express
+import sequelize from 'sequelize'
+import fs from 'fs-extra'
+import { createNewSortInstance } from 'fast-sort'
 
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
-const CacheManager = require('../managers/CacheManager')
-const CoverManager = require('../managers/CoverManager')
-const AuthorFinder = require('../finders/AuthorFinder')
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
+import CacheManager from '../managers/CacheManager.js'
+import CoverManager from '../managers/CoverManager.js'
+import AuthorFinder from '../finders/AuthorFinder.js'
 
-const { reqSupportsWebp, isValidASIN } = require('../utils/index')
+import { reqSupportsWebp, isValidASIN } from '../utils/index.js'
 
 const naturalSort = createNewSortInstance({
   comparer: new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }).compare
@@ -431,4 +432,4 @@ class AuthorController {
     next()
   }
 }
-module.exports = new AuthorController()
+export default new AuthorController()

@@ -1,8 +1,8 @@
-const { AudioMimeType } = require('../../utils/constants')
-const AudioMetaTags = require('../metadata/AudioMetaTags')
-const FileMetadata = require('../metadata/FileMetadata')
+import { AudioMimeType } from '../../utils/constants.js'
+import AudioMetaTags from '../metadata/AudioMetaTags.js'
+import FileMetadata from '../metadata/FileMetadata.js'
 
-class AudioFile {
+export default class AudioFile {
   constructor(data) {
     this.index = null
     this.ino = null
@@ -196,4 +196,3 @@ class AudioFile {
     return hasUpdated
   }
 }
-module.exports = AudioFile

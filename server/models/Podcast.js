@@ -1,4 +1,4 @@
-const { DataTypes, Model } = require('sequelize')
+import { DataTypes, Model } from 'sequelize'
 
 /**
  * @typedef PodcastExpandedProperties
@@ -7,7 +7,7 @@ const { DataTypes, Model } = require('sequelize')
  * @typedef {Podcast & PodcastExpandedProperties} PodcastExpanded
  */
 
-class Podcast extends Model {
+export default class Podcast extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -180,5 +180,3 @@ class Podcast extends Model {
     )
   }
 }
-
-module.exports = Podcast

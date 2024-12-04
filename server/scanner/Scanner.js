@@ -1,17 +1,17 @@
-const Logger = require('../Logger')
-const SocketAuthority = require('../SocketAuthority')
-const Database = require('../Database')
-const { getTitleIgnorePrefix } = require('../utils/index')
+import Logger from '../Logger.js'
+import SocketAuthority from '../SocketAuthority.js'
+import Database from '../Database.js'
+import { getTitleIgnorePrefix } from '../utils/index.js'
 
 // Utils
-const { findMatchingEpisodesInFeed, getPodcastFeed } = require('../utils/podcastUtils')
+import { findMatchingEpisodesInFeed, getPodcastFeed } from '../utils/podcastUtils.js'
 
-const BookFinder = require('../finders/BookFinder')
-const PodcastFinder = require('../finders/PodcastFinder')
-const LibraryScan = require('./LibraryScan')
-const LibraryScanner = require('./LibraryScanner')
-const CoverManager = require('../managers/CoverManager')
-const TaskManager = require('../managers/TaskManager')
+import BookFinder from '../finders/BookFinder.js'
+import PodcastFinder from '../finders/PodcastFinder.js'
+import LibraryScan from './LibraryScan.js'
+import LibraryScanner from './LibraryScanner.js'
+import CoverManager from '../managers/CoverManager.js'
+import TaskManager from '../managers/TaskManager.js'
 
 class Scanner {
   constructor() {}
@@ -423,4 +423,4 @@ class Scanner {
     TaskManager.taskFinished(task)
   }
 }
-module.exports = new Scanner()
+export default new Scanner()

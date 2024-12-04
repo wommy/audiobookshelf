@@ -1,12 +1,12 @@
-const Logger = require('../../Logger')
-const BookMetadata = require('../metadata/BookMetadata')
-const { areEquivalent, copyValue } = require('../../utils/index')
-const { filePathToPOSIX } = require('../../utils/fileUtils')
-const AudioFile = require('../files/AudioFile')
-const AudioTrack = require('../files/AudioTrack')
-const EBookFile = require('../files/EBookFile')
+import Logger from '../../Logger.js'
+import BookMetadata from '../metadata/BookMetadata.js'
+import { areEquivalent, copyValue } from '../../utils/index.js'
+import { filePathToPOSIX } from '../../utils/fileUtils.js'
+import AudioFile from '../files/AudioFile.js'
+import AudioTrack from '../files/AudioTrack.js'
+import EBookFile from '../files/EBookFile.js'
 
-class Book {
+export default class Book {
   constructor(book) {
     this.id = null
     this.libraryItemId = null
@@ -271,4 +271,3 @@ class Book {
     return this.chapters?.map(ch => ({ ...ch })) || []
   }
 }
-module.exports = Book

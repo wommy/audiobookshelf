@@ -1,7 +1,7 @@
-const { DataTypes, Model } = require('sequelize')
-const oldDevice = require('../objects/DeviceInfo')
+import { DataTypes, Model } from 'sequelize'
+import oldDevice from '../objects/DeviceInfo.js'
 
-class Device extends Model {
+export default class Device extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -173,5 +173,3 @@ class Device extends Model {
     })
   }
 }
-
-module.exports = Device

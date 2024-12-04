@@ -1,10 +1,10 @@
-const Path = require('path')
-const fs = require('../libs/fsExtra')
-const stream = require('stream')
-const Logger = require('../Logger')
-const { resizeImage } = require('../utils/ffmpegHelpers')
-const { encodeUriPath } = require('../utils/fileUtils')
-const Database = require('../Database')
+import Path from 'node:path'
+import fs from 'fs-extra'
+import stream from 'node:stream'
+import Logger from '../Logger.js'
+import { resizeImage } from '../utils/ffmpegHelpers.js'
+import { encodeUriPath } from '../utils/fileUtils.js'
+import Database from '../Database.js'
 
 class CacheManager {
   constructor() {
@@ -172,4 +172,4 @@ class CacheManager {
     readStream.pipe(res)
   }
 }
-module.exports = new CacheManager()
+export default new CacheManager()

@@ -1,11 +1,11 @@
-const date = require('../libs/dateAndTime')
-const uuidv4 = require('uuid').v4
-const serverVersion = require('../../package.json').version
-const BookMetadata = require('./metadata/BookMetadata')
-const PodcastMetadata = require('./metadata/PodcastMetadata')
-const DeviceInfo = require('./DeviceInfo')
+import date from 'date-and-time'
+import { v4 as uuidv4 } from 'uuid'
+import serverVersion from '../../package.json' with { type: 'json' }
+import BookMetadata from './metadata/BookMetadata.js'
+import PodcastMetadata from './metadata/PodcastMetadata.js'
+import DeviceInfo from './DeviceInfo.js'
 
-class PlaybackSession {
+export default class PlaybackSession {
   constructor(session) {
     this.id = null
     this.userId = null
@@ -256,4 +256,4 @@ class PlaybackSession {
     this.updatedAt = Date.now()
   }
 }
-module.exports = PlaybackSession
+

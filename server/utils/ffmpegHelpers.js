@@ -1,11 +1,11 @@
-const axios = require('axios')
-const Ffmpeg = require('../libs/fluentFfmpeg')
-const ffmpgegUtils = require('../libs/fluentFfmpeg/utils')
-const fs = require('../libs/fsExtra')
-const Path = require('path')
-const Logger = require('../Logger')
-const { filePathToPOSIX, copyToExisting } = require('./fileUtils')
-const LibraryItem = require('../objects/LibraryItem')
+import axios from 'axios'
+import Ffmpeg from 'fluent-ffmpeg'
+import ffmpgegUtils from 'fluent-ffmpeg/lib/utils.js'
+import fs from 'fs-extra'
+import Path from 'node:path'
+import Logger from '../Logger.js'
+import { filePathToPOSIX, copyToExisting } from './fileUtils.js'
+import LibraryItem from '../objects/LibraryItem.js'
 
 function escapeSingleQuotes(path) {
   // return path.replace(/'/g, '\'\\\'\'')
@@ -46,7 +46,7 @@ async function writeConcatFile(tracks, outputPath, startTime = 0) {
     return null
   }
 }
-module.exports.writeConcatFile = writeConcatFile
+export { writeConcatFile }
 
 async function extractCoverArt(filepath, outputpath) {
   var dirname = Path.dirname(outputpath)
@@ -72,7 +72,7 @@ async function extractCoverArt(filepath, outputpath) {
     ffmpeg.run()
   })
 }
-module.exports.extractCoverArt = extractCoverArt
+export { extractCoverArt }
 
 //This should convert based on the output file extension as well
 async function resizeImage(filePath, outputPath, width, height) {
@@ -95,9 +95,9 @@ async function resizeImage(filePath, outputPath, width, height) {
     ffmpeg.run()
   })
 }
-module.exports.resizeImage = resizeImage
+export { resizeImage }
 
-module.exports.downloadPodcastEpisode = (podcastEpisodeDownload) => {
+async function downloadPodcastEpisode(podcastEpisodeDownload) {
   return new Promise(async (resolve) => {
     const response = await axios({
       url: podcastEpisodeDownload.url,
@@ -189,6 +189,7 @@ module.exports.downloadPodcastEpisode = (podcastEpisodeDownload) => {
     ffmpeg.run()
   })
 }
+export { downloadPodcastEpisode }
 
 /**
  * Generates ffmetadata file content from the provided metadata object and chapters array.
@@ -222,7 +223,7 @@ function generateFFMetadata(metadata, chapters) {
   return ffmetadataContent
 }
 
-module.exports.generateFFMetadata = generateFFMetadata
+export { generateFFMetadata }
 
 /**
  * Writes FFmpeg metadata file with the given metadata and chapters.
@@ -243,7 +244,7 @@ async function writeFFMetadataFile(metadata, chapters, ffmetadataPath) {
   }
 }
 
-module.exports.writeFFMetadataFile = writeFFMetadataFile
+export { writeFFMetadataFile }
 
 /**
  * Adds an ffmetadata and optionally a cover image to an audio file using fluent-ffmpeg.
@@ -350,7 +351,7 @@ async function addCoverAndMetadataToFile(audioFilePath, coverFilePath, metadataF
   })
 }
 
-module.exports.addCoverAndMetadataToFile = addCoverAndMetadataToFile
+export { addCoverAndMetadataToFile }
 
 function escapeFFMetadataValue(value) {
   return value.replace(/([;=\n\\#])/g, '\\$1')
@@ -391,7 +392,7 @@ function getFFMetadataObject(libraryItem, audioFilesLength) {
   return ffmetadata
 }
 
-module.exports.getFFMetadataObject = getFFMetadataObject
+export { getFFMetadataObject }
 
 /**
  * Merges audio files into a single output file using FFmpeg.
@@ -480,4 +481,4 @@ async function mergeAudioFiles(audioTracks, duration, itemCachePath, outputFileP
   })
 }
 
-module.exports.mergeAudioFiles = mergeAudioFiles
+export { mergeAudioFiles }

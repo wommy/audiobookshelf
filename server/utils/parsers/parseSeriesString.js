@@ -8,7 +8,7 @@
  * @param {string} seriesString
  * @returns {{name: string, sequence: string}|null}
  */
-module.exports.parse = (seriesString) => {
+export const parse = (seriesString) => {
   if (!seriesString || typeof seriesString !== 'string') return null
 
   let sequence = null

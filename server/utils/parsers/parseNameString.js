@@ -3,7 +3,7 @@
 //   accepts comma separated lists e.g. "Jon Smith, Jane Smith" or "Smith, Jon, Smith, Jane"
 //   can be separated by "&" e.g. "Jon Smith & Jane Smith" or "Smith, Jon & Smith, Jane"
 //
-const parseFullName = require('./parseFullName')
+import parseFullName from './parseFullName.js'
 
 function parseName(name) {
   var parts = parseFullName(name)
@@ -28,7 +28,7 @@ function checkIsALastName(name) {
 }
 
 // Handle name already in First Last format and return Last, First
-module.exports.nameToLastFirst = (firstLast) => {
+export const nameToLastFirst = (firstLast) => {
   var nameObj = parseName(firstLast)
   if (!nameObj.last_name) return nameObj.first_name
   else if (!nameObj.first_name) return nameObj.last_name
@@ -36,7 +36,7 @@ module.exports.nameToLastFirst = (firstLast) => {
 }
 
 // Handle any name string
-module.exports.parse = (nameString) => {
+export const parse = (nameString) => {
   if (!nameString) return null
 
   var splitNames = []

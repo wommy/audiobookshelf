@@ -1,8 +1,8 @@
-const uuidv4 = require("uuid").v4
-const Logger = require('../Logger')
-const { LogLevel } = require('../utils/constants')
+import { v4 as uuidv4 } from 'uuid'
+import Logger from '../Logger.js'
+import { LogLevel } from '../utils/constants.js'
 
-class ScanLogger {
+export default class ScanLogger {
   constructor() {
     this.id = null
     this.type = null
@@ -67,4 +67,3 @@ class ScanLogger {
     this.logs.push(logObj)
   }
 }
-module.exports = ScanLogger

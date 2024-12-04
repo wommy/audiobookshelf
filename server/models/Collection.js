@@ -1,8 +1,8 @@
-const { DataTypes, Model, Sequelize } = require('sequelize')
+import { DataTypes, Model, Sequelize } from 'sequelize'
 
-const oldCollection = require('../objects/Collection')
+import oldCollection from '../objects/Collection.js'
 
-class Collection extends Model {
+export default class Collection extends Model {
   constructor(values, options) {
     super(values, options)
 
@@ -322,5 +322,3 @@ class Collection extends Model {
     return json
   }
 }
-
-module.exports = Collection

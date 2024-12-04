@@ -99,4 +99,4 @@ async function down({ context: { queryInterface, logger } }) {
   logger.info('[2.17.0 migration] DOWNGRADE END: 2.17.0-uuid-replacement')
 }
 
-module.exports = { up, down }
+export default { up, down }

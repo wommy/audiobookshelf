@@ -1,5 +1,5 @@
-const Logger = require('../Logger')
-const iTunes = require('../providers/iTunes')
+import Logger from '../Logger.js'
+import iTunes from '../providers/iTunes.js'
 
 class PodcastFinder {
   constructor() {
@@ -28,4 +28,4 @@ class PodcastFinder {
     return results.map(r => r.cover).filter(r => r)
   }
 }
-module.exports = new PodcastFinder()
+export default new PodcastFinder()

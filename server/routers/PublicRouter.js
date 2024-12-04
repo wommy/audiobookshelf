@@ -1,7 +1,7 @@
-const express = require('express')
-const ShareController = require('../controllers/ShareController')
+import express from 'express'
+import ShareController from '../controllers/ShareController.js'
 
-class PublicRouter {
+export default class PublicRouter {
   constructor(playbackSessionManager) {
     /** @type {import('../managers/PlaybackSessionManager')} */
     this.playbackSessionManager = playbackSessionManager
@@ -18,4 +18,3 @@ class PublicRouter {
     this.router.patch('/share/:slug/progress', ShareController.updateMediaItemShareProgress.bind(this))
   }
 }
-module.exports = PublicRouter

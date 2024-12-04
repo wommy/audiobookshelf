@@ -1,7 +1,7 @@
-const Logger = require('../../Logger')
-const { areEquivalent, copyValue, getTitleIgnorePrefix, getTitlePrefixAtEnd } = require('../../utils/index')
+import Logger from '../../Logger.js'
+import { areEquivalent, copyValue, getTitleIgnorePrefix, getTitlePrefixAtEnd } from '../../utils/index.js'
 
-class PodcastMetadata {
+export default class PodcastMetadata {
   constructor(metadata) {
     this.title = null
     this.author = null
@@ -124,4 +124,3 @@ class PodcastMetadata {
     return hasUpdates
   }
 }
-module.exports = PodcastMetadata

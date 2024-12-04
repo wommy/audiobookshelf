@@ -1,12 +1,12 @@
-const Path = require('path')
-const Logger = require('../Logger')
-const prober = require('../utils/prober')
-const { LogLevel } = require('../utils/constants')
-const { parseOverdriveMediaMarkersAsChapters } = require('../utils/parsers/parseOverdriveMediaMarkers')
-const parseNameString = require('../utils/parsers/parseNameString')
-const parseSeriesString = require('../utils/parsers/parseSeriesString')
-const LibraryItem = require('../models/LibraryItem')
-const AudioFile = require('../objects/files/AudioFile')
+import Path from 'node:path'
+import Logger from '../Logger.js'
+import * as prober from '../utils/prober.js'
+import { LogLevel } from '../utils/constants.js'
+import { parseOverdriveMediaMarkersAsChapters } from '../utils/parsers/parseOverdriveMediaMarkers.js'
+import * as parseNameString from '../utils/parsers/parseNameString.js'
+import * as parseSeriesString from '../utils/parsers/parseSeriesString.js'
+import LibraryItem from '../models/LibraryItem.js'
+import AudioFile from '../objects/files/AudioFile.js'
 
 class AudioFileScanner {
   constructor() {}
@@ -572,4 +572,4 @@ class AudioFileScanner {
     return [genreTag]
   }
 }
-module.exports = new AudioFileScanner()
+export default new AudioFileScanner()

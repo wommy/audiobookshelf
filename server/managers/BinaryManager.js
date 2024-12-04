@@ -1,14 +1,14 @@
-const child_process = require('child_process')
-const { promisify } = require('util')
+import child_process from 'node:child_process'
+import { promisify } from 'node:util'
 const exec = promisify(child_process.exec)
-const os = require('os')
-const axios = require('axios')
-const path = require('path')
-const which = require('../libs/which')
-const fs = require('../libs/fsExtra')
-const Logger = require('../Logger')
-const fileUtils = require('../utils/fileUtils')
-const StreamZip = require('../libs/nodeStreamZip')
+import os from 'node:os'
+import axios from 'axios'
+import path from 'node:path'
+import which from 'which'
+import fs from 'fs-extra'
+import Logger from '../Logger.js'
+import * as fileUtils from '../utils/fileUtils.js'
+import StreamZip from 'node-stream-zip'
 
 class ZippedAssetDownloader {
   constructor() {
@@ -219,7 +219,7 @@ class NunicodeDownloader extends ZippedAssetDownloader {
   }
 }
 
-class Binary {
+export class Binary {
   constructor(name, type, envVariable, validVersions, source, required = true) {
     if (!name) throw new Error('Binary name is required')
     this.name = name
@@ -317,10 +317,10 @@ class Binary {
   }
 }
 
-const ffbinaries = new FFBinariesDownloader()
-const nunicode = new NunicodeDownloader()
+export const ffbinaries = new FFBinariesDownloader()
+export const nunicode = new NunicodeDownloader()
 
-class BinaryManager {
+export default class BinaryManager {
   defaultRequiredBinaries = [
     new Binary('ffmpeg', 'executable', 'FFMPEG_PATH', ['5.1'], ffbinaries), // ffmpeg executable
     new Binary('ffprobe', 'executable', 'FFPROBE_PATH', ['5.1'], ffbinaries), // ffprobe executable
@@ -430,8 +430,3 @@ class BinaryManager {
     Logger.info(`[BinaryManager] Binaries installed to ${destination}`)
   }
 }
-
-module.exports = BinaryManager
-module.exports.Binary = Binary // for testing
-module.exports.ffbinaries = ffbinaries // for testing
-module.exports.nunicode = nunicode // for testing

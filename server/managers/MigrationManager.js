@@ -1,12 +1,12 @@
-const { Umzug, SequelizeStorage } = require('../libs/umzug')
-const { Sequelize, DataTypes } = require('sequelize')
-const semver = require('semver')
-const path = require('path')
-const Module = require('module')
-const fs = require('../libs/fsExtra')
-const Logger = require('../Logger')
+import { Umzug, SequelizeStorage } from 'umzug'
+import { Sequelize, DataTypes } from 'sequelize'
+import semver from 'semver'
+import path from 'node:path'
+import Module from 'node:module'
+import fs from 'fs-extra'
+import Logger from '../Logger.js'
 
-class MigrationManager {
+export default class MigrationManager {
   static MIGRATIONS_META_TABLE = 'migrationsMeta'
 
   /**
@@ -302,5 +302,3 @@ class MigrationManager {
     this.databaseVersion = this.serverVersion
   }
 }
-
-module.exports = MigrationManager

@@ -1,13 +1,13 @@
-const OpenLibrary = require('../providers/OpenLibrary')
-const GoogleBooks = require('../providers/GoogleBooks')
-const Audible = require('../providers/Audible')
-const iTunes = require('../providers/iTunes')
-const Audnexus = require('../providers/Audnexus')
-const FantLab = require('../providers/FantLab')
-const AudiobookCovers = require('../providers/AudiobookCovers')
-const CustomProviderAdapter = require('../providers/CustomProviderAdapter')
-const Logger = require('../Logger')
-const { levenshteinDistance, escapeRegExp } = require('../utils/index')
+import OpenLibrary from '../providers/OpenLibrary.js'
+import GoogleBooks from '../providers/GoogleBooks.js'
+import Audible from '../providers/Audible.js'
+import iTunes from '../providers/iTunes.js'
+import Audnexus from '../providers/Audnexus.js'
+import FantLab from '../providers/FantLab.js'
+import AudiobookCovers from '../providers/AudiobookCovers.js'
+import CustomProviderAdapter from '../providers/CustomProviderAdapter.js'
+import Logger from '../Logger.js'
+import { levenshteinDistance, escapeRegExp } from '../utils/index.js'
 
 class BookFinder {
   #providerResponseTimeout = 30000
@@ -496,7 +496,7 @@ class BookFinder {
     return this.audnexus.getChaptersByASIN(asin, region)
   }
 }
-module.exports = new BookFinder()
+export default new BookFinder()
 
 function stripSubtitle(title) {
   if (title.includes(':')) {

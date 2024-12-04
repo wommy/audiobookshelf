@@ -1,7 +1,7 @@
-const Logger = require('../Logger')
-const archiver = require('../libs/archiver')
+import Logger from '../Logger.js'
+import archiver from 'archiver'
 
-module.exports.zipDirectoryPipe = (path, filename, res) => {
+export const zipDirectoryPipe = (path, filename, res) => {
   return new Promise((resolve, reject) => {
     // create a file to stream archive data to
     res.attachment(filename)

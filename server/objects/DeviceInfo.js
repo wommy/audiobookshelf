@@ -1,6 +1,6 @@
-const uuidv4 = require("uuid").v4
+import { v4 as uuidv4 } from 'uuid'
 
-class DeviceInfo {
+export default class DeviceInfo {
   constructor(deviceInfo = null) {
     this.id = null
     this.userId = null
@@ -149,4 +149,3 @@ class DeviceInfo {
     return hasUpdates
   }
 }
-module.exports = DeviceInfo

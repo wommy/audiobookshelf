@@ -1,9 +1,9 @@
-const axios = require('axios').default
-const htmlSanitizer = require('../utils/htmlSanitizer')
-const Logger = require('../Logger')
-const { isValidASIN } = require('../utils/index')
+import axios from 'axios'
+import * as htmlSanitizer from '../utils/htmlSanitizer.js'
+import Logger from '../Logger.js'
+import { isValidASIN } from '../utils/index.js'
 
-class Audible {
+export default class Audible {
   #responseTimeout = 30000
 
   constructor() {
@@ -165,5 +165,3 @@ class Audible {
     return items.filter(Boolean).map((item) => this.cleanResult(item)) || []
   }
 }
-
-module.exports = Audible

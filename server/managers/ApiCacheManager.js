@@ -1,8 +1,8 @@
-const { LRUCache } = require('lru-cache')
-const Logger = require('../Logger')
-const Database = require('../Database')
+import { LRUCache } from 'lru-cache'
+import Logger from '../Logger.js'
+import Database from '../Database.js'
 
-class ApiCacheManager {
+export default class ApiCacheManager {
   defaultCacheOptions = { max: 1000, maxSize: 10 * 1000 * 1000, sizeCalculation: (item) => item.body.length + JSON.stringify(item.headers).length }
   defaultTtlOptions = { ttl: 30 * 60 * 1000 }
 
@@ -69,4 +69,3 @@ class ApiCacheManager {
     }
   }
 }
-module.exports = ApiCacheManager
